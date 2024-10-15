@@ -28,7 +28,7 @@ export class UserStoryFormComponent {
     this.newUserStory = data ? { ...data } : new UserStory();
   }
 
-  // Método para manejar la creación o actualización de la user story
+  // Metodo para manejar la creación o actualización de la user story
   onSubmit(): void {
     if (this.newUserStory.id) {
       // Actualiza la historia si ya tiene ID

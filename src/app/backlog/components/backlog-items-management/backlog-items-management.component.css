@@ -31,3 +31,8 @@
   color: white;
   cursor: pointer;
 }
+
+.card-footer-container{
+  display: flex;
+  justify-content: space-between;
+}

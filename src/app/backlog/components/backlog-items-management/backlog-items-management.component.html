@@ -15,8 +15,12 @@
     <span>Sprint: {{ userStory.sprint }}</span> <br>
     <span>Start Date: {{ userStory.startDate }}</span> <br>
     <span>End Date: {{ userStory.endDate }}</span> <br>
-    <span>Effort: {{ userStory.effort }}</span><br>
-    <button mat-raised-button (click)="deleteUserStory(userStory)">Delete</button>
+    <span>Effort: {{ userStory.effort }}</span>
+    <div class="card-footer-container">
+      <button mat-raised-button (click)="deleteUserStory(userStory)">Delete</button>
+      <button> Edit </button>
+      <button> Add to an epic </button>
+    </div>
   </div>
 </mat-card>
 </div>
@@ -36,6 +40,11 @@
       <span>Project: {{ epic.projectId }}</span> <br>
       <span>Status: {{ epic.status }}</span> <br>
       <span>Creation Date: {{ epic.creationDate }}</span>
+      <div class="card-footer-container">
+        <button>Delete</button>
+        <button> Edit </button>
+        <button> Show user stories </button>
+      </div>
     </div>
   </mat-card>
 </div>
@@ -54,7 +63,12 @@
       <span>Status: {{ task.status }}</span> <br>
       <span>Creation Date: {{ task.creationDate }}</span> <br>
       <span>User Story: {{ task.userStoryId }}</span> <br>
-      <span>Sprint: {{ task.sprint }}</span>
+      <span>Sprint: {{ task.sprint }}</span> <br>
+      <div class="card-footer-container">
+        <button>Delete</button>
+        <button> Edit </button>
+        <button> Add to an user story </button>
+      </div>
     </div>
   </mat-card>
 </div>
