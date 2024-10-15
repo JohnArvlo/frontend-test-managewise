@@ -1,0 +1,37 @@
+{
+  "userStories": [
+    {
+      "Epic_Id": 1,
+      "Id": 101,
+      "Title": "Implementación de la autenticación de usuarios",
+      "Description": "Desarrollar un sistema de autenticación que permita a los usuarios iniciar sesi��n con su correo electrónico y contraseña.",
+      "AcceptanceCriteria": "Los usuarios deben poder iniciar sesión, recibir un mensaje de error si las credenciales son incorrectas y tener la opción de restablecer su contraseña.",
+      "Status": "En Progreso",
+      "CreationDate": "2024-10-01",
+      "Subgroup_ID": 5,
+      "Sprint_Id": 2
+    },
+    {
+      "Epic_Id": 1,
+      "Id": 102,
+      "Title": "Creación de la interfaz de usuario para la gestión de proyectos",
+      "Description": "Diseñar y desarrollar una interfaz de usuario amigable para que los usuarios puedan gestionar sus proyectos.",
+      "AcceptanceCriteria": "La interfaz debe ser intuitiva, permitiendo a los usuarios crear, editar y eliminar proyectos fácilmente.",
+      "Status": "Pendiente",
+      "CreationDate": "2024-10-02",
+      "Subgroup_ID": 5,
+      "Sprint_Id": 3
+    },
+    {
+      "Epic_Id": 2,
+      "Id": 201,
+      "Title": "Integración de la API de terceros",
+      "Description": "Conectar la aplicación con una API de terceros para obtener datos adicionales.",
+      "AcceptanceCriteria": "Los datos deben actualizarse en tiempo real y mostrarse correctamente en la interfaz de usuario.",
+      "Status": "Completado",
+      "CreationDate": "2024-10-05",
+      "Subgroup_ID": 6,
+      "Sprint_Id": 1
+    }
+  ]
+}
