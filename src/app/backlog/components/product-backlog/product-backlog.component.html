@@ -1,0 +1,27 @@
+<mat-card id="product-backlog-card">
+  <h6>Product Backlog</h6>
+  <mat-card *ngFor="let userStory of filteredUserStories" class="us-card">
+    <div class="us-container">
+      <span>US{{ userStory.id }}</span>
+      <span>{{ userStory.title }}</span>
+      <span>{{ userStory.status }}</span>
+    </div>
+  </mat-card>
+</mat-card>
+
+<br><br><br>
+
+<mat-card id="sprint-backlog-card">
+  <div class="sprint-header">
+    <h6>Sprint Backlog</h6>
+    <button class="start-sprint">Start Sprint</button>
+  </div>
+  <mat-card *ngFor="let userStory of userStories" class="us-card">
+    <div class="us-container">
+      <span>US{{ userStory.id }}</span>
+      <span>{{ userStory.title }}</span>
+      <span>{{ userStory.status }}</span>
+    </div>
+  </mat-card>
+  <button class="add-item">+ Add an item</button>
+</mat-card>

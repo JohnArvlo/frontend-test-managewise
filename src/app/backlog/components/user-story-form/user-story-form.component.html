@@ -1,0 +1,50 @@
+<h2 class="form-title">{{ newUserStory.id ? 'Editar User Story' : 'Agregar nueva User Story' }}</h2>
+<form (ngSubmit)="onSubmit()" class="user-story-form">
+
+  <!-- Campo del Sprint Asociado -->
+  <mat-form-field>
+    <mat-label>Sprint Asociado</mat-label>
+    <input matInput [(ngModel)]="newUserStory.sprint" name="sprint" type="number">
+  </mat-form-field>
+
+  <!-- Campo Creado por -->
+  <mat-form-field>
+    <mat-label>Creado por</mat-label>
+    <input matInput [(ngModel)]="newUserStory.owner" name="owner" required>
+  </mat-form-field>
+
+  <!-- Campo Título -->
+  <mat-form-field>
+    <mat-label>Título</mat-label>
+    <input matInput [(ngModel)]="newUserStory.title" name="title" required>
+  </mat-form-field>
+
+  <!-- Campo Descripción -->
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="newUserStory.description" name="description" required></textarea>
+  </mat-form-field>
+
+  <!-- Campo Estado -->
+  <mat-form-field>
+    <mat-label>Estado</mat-label>
+    <mat-select [(ngModel)]="newUserStory.status" name="status" required>
+      <mat-option value="Pending">Pendiente</mat-option>
+      <mat-option value="In Progress">En Progreso</mat-option>
+      <mat-option value="Complete">Completado</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Campo Esfuerzo -->
+  <mat-form-field>
+    <mat-label>Esfuerzo (horas estimadas)</mat-label>
+    <input matInput [(ngModel)]="newUserStory.effort" name="effort" type="number" required>
+  </mat-form-field>
+
+  <!-- Acciones -->
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="submit">{{ newUserStory.id ? 'Guardar cambios' : 'Agregar' }}</button>
+    <button mat-raised-button color="warn" (click)="onCancel()" type="button">Cancelar</button>
+  </mat-card-actions>
+
+</form>

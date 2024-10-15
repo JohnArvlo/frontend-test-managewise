@@ -1,0 +1,33 @@
+.us-card{
+  background-color: white;
+  border-radius: 10px;
+  margin: 15px;
+  padding: 15px;
+  width: 20rem;
+}
+
+.us-section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.item-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-create{
+  width: 5rem;
+  height: 2rem;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  border: none;
+}
+
+.item-create:hover{
+  background-color: #212121;
+  color: white;
+  cursor: pointer;
+}

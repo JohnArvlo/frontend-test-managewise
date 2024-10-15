@@ -1,0 +1,60 @@
+
+<div class="item-header">
+  <h6>User Stories</h6>
+  <button mat-raised-button class="item-create" (click)="openAddUserStoryForm()">Create</button>
+</div>
+
+<div class="us-section">
+<mat-card *ngFor="let userStory of userStories" class="us-card">
+  <div class="us-container">
+    <mat-card-header><span>US{{ userStory.id }}</span></mat-card-header>
+    <span>Title: {{ userStory.title }}</span> <br>
+    <span>Description: {{ userStory.description }}</span> <br>
+    <span>Owner: {{ userStory.owner }}</span> <br>
+    <span>Status: {{ userStory.status }}</span> <br>
+    <span>Sprint: {{ userStory.sprint }}</span> <br>
+    <span>Start Date: {{ userStory.startDate }}</span> <br>
+    <span>End Date: {{ userStory.endDate }}</span> <br>
+    <span>Effort: {{ userStory.effort }}</span><br>
+    <button mat-raised-button (click)="deleteUserStory(userStory)">Delete</button>
+  </div>
+</mat-card>
+</div>
+
+
+<div class="item-header">
+  <h6>Epics</h6>
+  <button class="item-create">Create</button>
+</div>
+
+<div class="us-section">
+  <mat-card *ngFor="let epic of epics" class="us-card">
+    <div class="us-container">
+      <mat-card-header><span>EP{{ epic.id }}</span> <br></mat-card-header>
+      <span>Title: {{ epic.title }}</span> <br>
+      <span>Description: {{ epic.description }}</span> <br>
+      <span>Project: {{ epic.projectId }}</span> <br>
+      <span>Status: {{ epic.status }}</span> <br>
+      <span>Creation Date: {{ epic.creationDate }}</span>
+    </div>
+  </mat-card>
+</div>
+
+<div class="item-header">
+  <h6>Tasks</h6>
+  <button class="item-create">Create</button>
+</div>
+
+<div class="us-section">
+  <mat-card *ngFor="let task of tasks" class="us-card">
+    <div class="us-container">
+      <mat-card-header><span>TS{{ task.id }}</span> <br></mat-card-header>
+      <span>Title: {{ task.title }}</span> <br>
+      <span>Description: {{ task.description }}</span> <br>
+      <span>Status: {{ task.status }}</span> <br>
+      <span>Creation Date: {{ task.creationDate }}</span> <br>
+      <span>User Story: {{ task.userStoryId }}</span> <br>
+      <span>Sprint: {{ task.sprint }}</span>
+    </div>
+  </mat-card>
+</div>
