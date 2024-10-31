@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CommonModule } from '@angular/common'; // Asegúrate de que esta línea está presente
 import { StatisticsChartComponent } from '../../components/statistics-chart/statistics-chart.component';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -19,7 +21,7 @@ export type ChartOptions = {
   selector: 'app-statistics-page',
   templateUrl: './statistics-page.component.html',
   styleUrls: ['./statistics-page.component.css'],
-  imports: [CommonModule, RouterModule, NgApexchartsModule, StatisticsChartComponent], // Asegúrate de que CommonModule esté aquí
+  imports: [CommonModule, RouterModule, NgApexchartsModule, StatisticsChartComponent, TranslateModule, TranslateModule], // Asegúrate de que CommonModule esté aquí
 })
 export class StatisticsPageComponent implements OnInit {
   public chartOptions: Partial<ChartOptions>;

@@ -1,10 +1,10 @@
-/* statistics-chart.component.css */
 canvas {
-  max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
-  max-height: 500px; /* Ajusta la altura máxima según tus necesidades */
-  width: 100%; /* Para que se ajuste al contenedor */
-  height: auto; /* Mantiene la relación de aspecto */
+  max-width: 600px; /* Adjusted width */
+  max-height: 400px; /* Adjusted height */
+  width: 100%; /* For responsive resizing */
+  height: auto; /* Maintains aspect ratio */
 }
+
 .download-button {
   background-color: #4CAF50; /* Verde */
   color: white;
@@ -23,6 +23,7 @@ canvas {
 .download-button:hover {
   background-color: #45a049; /* Verde más oscuro al pasar el ratón */
 }
+
 .timeline-button {
   background-color: #FBB560;
   color: #fff;

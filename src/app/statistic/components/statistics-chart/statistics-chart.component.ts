@@ -2,24 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, registerables, TooltipItem } from 'chart.js';
 import { StatisticsService } from '../../services/statistics.service';
 import { Statistics } from '../../model/statistic-entity/statistic.entity';
-import { Router } from '@angular/router'; // Importa el Router
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-statistics-chart',
   standalone: true,
+  imports: [TranslateModule],
   templateUrl: './statistics-chart.component.html',
   styleUrls: ['./statistics-chart.component.css']
 })
 export class StatisticsChartComponent implements OnInit {
   public chart: any;
 
-  constructor(private statisticsService: StatisticsService, private router: Router) {} // Inyecta el Router
+  constructor(private statisticsService: StatisticsService, private router: Router, private translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    this.translate.use('en'); // O 'in'
+  }
 
   ngOnInit(): void {
     this.fetchStatistics();
   }
+
 
   fetchStatistics() {
     this.statisticsService.getUserStories().subscribe((statistics: Statistics[]) => {
@@ -83,7 +90,7 @@ export class StatisticsChartComponent implements OnInit {
             backgroundColor: 'rgba(0, 255, 0, 0.5)' // Verde
           },
           {
-            label: 'Historias en Progreso (%)',
+            label: 'Historias en progreso (%)',
             data: inProgressPercentages,
             backgroundColor: 'rgba(255, 0, 0, 0.5)' // Rojo
           }
@@ -104,31 +111,38 @@ export class StatisticsChartComponent implements OnInit {
           tooltip: {
             callbacks: {
               title: (tooltipItems) => {
-                const sprintIndex = tooltipItems[0].dataIndex; // Get the index of the data point
-                const sprint = sprintCounts[sprintIndex + 1]; // Get the corresponding sprint data
-                return `Sprint ${sprintIndex + 1}`; // Set the title for the tooltip
+                const sprintIndex = tooltipItems[0].dataIndex;
+                return `Sprint ${sprintIndex + 1}`;
               },
               label: (tooltipItem: TooltipItem<'bar'>) => {
                 const datasetLabel = tooltipItem.dataset.label || '';
-                const value = tooltipItem.raw as number; // Use 'as number' to assert type
+                const value = tooltipItem.raw as number;
                 return `${datasetLabel}: ${value.toFixed(2)}%`;
               },
               afterLabel: (tooltipItem: TooltipItem<'bar'>) => {
-                const sprintIndex = tooltipItem.dataIndex; // Get the index of the data point
-                const sprintData = sprintCounts[sprintIndex + 1]; // Get the corresponding sprint data
-                const titles = [...sprintData.titlesComplete, ...sprintData.titlesInProgress]; // Combine complete and in-progress titles
+                const sprintIndex = tooltipItem.dataIndex;
+                const sprintData = sprintCounts[sprintIndex + 1];
 
-                // Build the additional info string
+                // Determina si es el dataset de "Completadas" o "En Progreso"
+                let titles: { title: string; owner: string }[];
+                if (tooltipItem.datasetIndex === 0) { // Dataset "Completadas"
+                  titles = sprintData.titlesComplete;
+                } else { // Dataset "En Progreso"
+                  titles = sprintData.titlesInProgress;
+                }
+
+                // Construir la cadena de información adicional
                 const additionalInfo = titles.map((titleInfo) => {
                   return `Title: ${titleInfo.title}, Owner: ${titleInfo.owner}`;
                 }).join('\n');
 
-                return additionalInfo || 'No titles'; // Return the combined string or a default message
+                return additionalInfo || 'No titles'; // Mostrar las historias relevantes o un mensaje por defecto
               }
             }
           }
         }
       }
+
     });
   }
 

@@ -1,5 +1,5 @@
 <div class="chart-container">
-  <button (click)="viewTimeline()" class="timeline-button">Timeline</button>
+  <button (click)="viewTimeline()" class="timeline-button">{{ 'timelineButton' | translate }}</button>
   <canvas id="myStatisticChart"></canvas>
-  <button (click)="downloadChart()" class="download-button">Descargar PNG</button>
+  <button (click)="downloadChart()" class="download-button">{{ 'downloadButton' | translate }}</button>
 </div>
