@@ -1,0 +1,19 @@
+<div class="form-list">
+  <h6 class="form-title">{{ newEpic.id ? 'Editar Épica' : 'Agregar nueva Épica' }}</h6>
+  <form (ngSubmit)="onSubmit()" class="epic-form">
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+      <input matInput [(ngModel)]="newEpic.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <textarea matInput [(ngModel)]="newEpic.description" name="description" required></textarea>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button class="action-button-cancel" mat-raised-button color="warn" (click)="onCancel()" type="button">Cancelar</button>
+      <button class="action-button-accept" mat-raised-button color="primary" type="submit">{{ newEpic.id ? 'Guardar' : 'Agregar' }}</button>
+    </mat-card-actions>
+  </form>
+</div>
