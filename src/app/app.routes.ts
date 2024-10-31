@@ -8,6 +8,7 @@ import { IssuesListComponent } from "./issue/pages/issues-list/issues-list.compo
 
   export const routes: Routes = [
     { path: 'statistics', component: StatisticsPageComponent },
+        { path: 'timeline', component: TimelinePageComponent },
     { path: 'backlog', component: BacklogPageComponent },
     { path: 'backlog-items', component: BacklogItemsPageComponent },
     { path: 'issues', component: IssuesListComponent },
