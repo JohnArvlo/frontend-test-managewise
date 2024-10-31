@@ -1,37 +1,226 @@
 {
+  "sprintbacklog": [
+    {
+      "id": 1,
+      "title": "Sprint 1",
+      "goal": "Implementación de la funcionalidad básica",
+      "startDate": "2024-10-01",
+      "endDate": "2024-10-15",
+      "status": "started"
+    },
+    {
+      "id": 2,
+      "title": "Sprint 2",
+      "goal": "Integración con APIs externas",
+      "startDate": "2024-10-16",
+      "endDate": "2024-10-30",
+      "status": "ended"
+    },
+    {
+      "id": 3,
+      "title": "Sprint 3",
+      "goal": "Mejoras de rendimiento y optimización",
+      "startDate": "2024-10-31",
+      "endDate": "2024-11-15",
+      "status": "not_started"
+    },
+    {
+      "id": 4,
+      "title": "Sprint 4",
+      "goal": "Implementación de funcionalidades sociales",
+      "startDate": "2024-11-16",
+      "endDate": "2024-11-30",
+      "status": "not_started"
+    }
+  ],
   "userStories": [
     {
-      "Epic_Id": 1,
-      "Id": 101,
-      "Title": "Implementación de la autenticación de usuarios",
-      "Description": "Desarrollar un sistema de autenticación que permita a los usuarios iniciar sesi��n con su correo electrónico y contraseña.",
-      "AcceptanceCriteria": "Los usuarios deben poder iniciar sesión, recibir un mensaje de error si las credenciales son incorrectas y tener la opción de restablecer su contraseña.",
-      "Status": "En Progreso",
-      "CreationDate": "2024-10-01",
-      "Subgroup_ID": 5,
-      "Sprint_Id": 2
+      "id": 1,
+      "title": "Como usuario, quiero registrarme en la aplicación",
+      "description": "Necesito un formulario de registro para crear una cuenta en la aplicación.",
+      "status": "to_do",
+      "epicId": 1,
+      "sprintBacklogId": 1,
+      "effort": 5,
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Diseñar formulario de registro",
+          "description": "Crear el diseño del formulario de registro.",
+          "status": "to_do",
+          "estimation": 4,
+          "userStoryId": 1
+        },
+        {
+          "id": 2,
+          "title": "Implementar lógica de registro",
+          "description": "Desarrollar la lógica del backend para el registro de usuarios.",
+          "status": "to_do",
+          "estimation": 6,
+          "userStoryId": 1
+        }
+      ]
     },
     {
-      "Epic_Id": 1,
-      "Id": 102,
-      "Title": "Creación de la interfaz de usuario para la gestión de proyectos",
-      "Description": "Diseñar y desarrollar una interfaz de usuario amigable para que los usuarios puedan gestionar sus proyectos.",
-      "AcceptanceCriteria": "La interfaz debe ser intuitiva, permitiendo a los usuarios crear, editar y eliminar proyectos fácilmente.",
-      "Status": "Pendiente",
-      "CreationDate": "2024-10-02",
-      "Subgroup_ID": 5,
-      "Sprint_Id": 3
+      "id": 2,
+      "title": "Como usuario, quiero iniciar sesión en la aplicación",
+      "description": "Necesito un formulario de inicio de sesión para acceder a mi cuenta.",
+      "status": "in_progress",
+      "epicId": 1,
+      "sprintBacklogId": 1,
+      "effort": 3,
+      "tasks": [
+        {
+          "id": 3,
+          "title": "Diseñar formulario de inicio de sesión",
+          "description": "Crear el diseño del formulario de inicio de sesión.",
+          "status": "done",
+          "estimation": 3,
+          "userStoryId": 2
+        },
+        {
+          "id": 4,
+          "title": "Implementar lógica de inicio de sesión",
+          "description": "Desarrollar la lógica del backend para la autenticación de usuarios.",
+          "status": "in_progress",
+          "estimation": 5,
+          "userStoryId": 2
+        }
+      ]
     },
     {
-      "Epic_Id": 2,
-      "Id": 201,
-      "Title": "Integración de la API de terceros",
-      "Description": "Conectar la aplicación con una API de terceros para obtener datos adicionales.",
-      "AcceptanceCriteria": "Los datos deben actualizarse en tiempo real y mostrarse correctamente en la interfaz de usuario.",
-      "Status": "Completado",
-      "CreationDate": "2024-10-05",
-      "Subgroup_ID": 6,
-      "Sprint_Id": 1
+      "id": 3,
+      "title": "Como usuario, quiero recuperar mi contraseña",
+      "description": "Necesito un sistema para poder recuperar mi contraseña en caso de olvidarla.",
+      "status": "to_do",
+      "epicId": 2,
+      "sprintBacklogId": 2,
+      "effort": 4,
+      "tasks": [
+        {
+          "id": 5,
+          "title": "Diseñar el flujo de recuperación de contraseña",
+          "description": "Crear el diseño y flujo de la funcionalidad de recuperación de contraseña.",
+          "status": "to_do",
+          "estimation": 3,
+          "userStoryId": 3
+        },
+        {
+          "id": 6,
+          "title": "Implementar lógica de recuperación de contraseña",
+          "description": "Desarrollar la lógica del backend para la recuperación de contraseña.",
+          "status": "to_do",
+          "estimation": 4,
+          "userStoryId": 3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Como usuario, quiero recibir notificaciones sobre eventos importantes",
+      "description": "Necesito recibir notificaciones para eventos como cambios en mi cuenta o actualizaciones importantes.",
+      "status": "to_do",
+      "epicId": 2,
+      "sprintBacklogId": 2,
+      "effort": 4,
+      "tasks": [
+        {
+          "id": 7,
+          "title": "Diseñar sistema de notificaciones",
+          "description": "Crear el diseño del sistema de notificaciones para el usuario.",
+          "status": "to_do",
+          "estimation": 3,
+          "userStoryId": 4
+        },
+        {
+          "id": 8,
+          "title": "Implementar lógica de envío de notificaciones",
+          "description": "Desarrollar la lógica del backend para el envío de notificaciones.",
+          "status": "to_do",
+          "estimation": 5,
+          "userStoryId": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Como usuario, quiero integrar mis redes sociales",
+      "description": "Necesito poder vincular mis cuentas de redes sociales para facilitar el registro y la autenticación.",
+      "status": "to_do",
+      "epicId": 4,
+      "sprintBacklogId": 4,
+      "effort": 6,
+      "tasks": [
+        {
+          "id": 9,
+          "title": "Diseñar flujo de autenticación social",
+          "description": "Crear el diseño para el flujo de autenticación a través de redes sociales.",
+          "status": "to_do",
+          "estimation": 4,
+          "userStoryId": 5
+        },
+        {
+          "id": 10,
+          "title": "Implementar lógica de autenticación social",
+          "description": "Desarrollar la lógica del backend para permitir el inicio de sesión a través de redes sociales.",
+          "status": "to_do",
+          "estimation": 6,
+          "userStoryId": 5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Como usuario, quiero ver un historial de mis actividades",
+      "description": "Necesito poder revisar un historial de mis actividades y cambios realizados en mi cuenta.",
+      "status": "to_do",
+      "epicId": 3,
+      "sprintBacklogId": 3,
+      "effort": 5,
+      "tasks": [
+        {
+          "id": 11,
+          "title": "Diseñar página de historial de actividades",
+          "description": "Crear el diseño de la página que mostrará el historial de actividades.",
+          "status": "to_do",
+          "estimation": 4,
+          "userStoryId": 6
+        },
+        {
+          "id": 12,
+          "title": "Implementar lógica para el historial de actividades",
+          "description": "Desarrollar la lógica del backend para registrar y mostrar las actividades del usuario.",
+          "status": "to_do",
+          "estimation": 5,
+          "userStoryId": 6
+        }
+      ]
+    }
+  ],
+  "epics": [
+    {
+      "id": 1,
+      "title": "Registro e inicio de sesión",
+      "description": "Implementar todas las funcionalidades relacionadas con el registro e inicio de sesión de usuarios.",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "title": "Integración de funcionalidades avanzadas",
+      "description": "Integrar funciones avanzadas como recuperación de contraseña y autenticación de dos factores.",
+      "status": "to_do"
+    },
+    {
+      "id": 3,
+      "title": "Mejoras de rendimiento",
+      "description": "Realizar optimizaciones en la aplicación para mejorar la velocidad y eficiencia.",
+      "status": "to_do"
+    },
+    {
+      "id": 4,
+      "title": "Funcionalidades sociales",
+      "description": "Implementar características que permitan la integración con redes sociales y compartir contenido.",
+      "status": "to_do"
     }
   ]
 }

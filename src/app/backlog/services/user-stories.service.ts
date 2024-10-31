@@ -4,6 +4,7 @@ import { environment } from "../../../environments/environment";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { catchError, Observable, retry, throwError } from "rxjs";
 
+import { Task } from "../model/task.entity";
 import { UserStory } from "../model/user-story.entity";
 
 @Injectable({
@@ -31,8 +32,8 @@ export class UserStoriesService {
   }
 
   // Create Resource
-  create(item: UserStory): Observable<UserStory> {
-    return this.http.post<UserStory>(this.resourcePath(), JSON.stringify(item), this.httpOptions)
+  create(item: any): Observable<UserStory> {
+    return this.http.post<UserStory>(this.resourcePath(), item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
@@ -43,7 +44,7 @@ export class UserStoriesService {
   }
 
   // Update Resource
-  update(id: number, item: UserStory): Observable<UserStory> {
+  update(id: number, item: any): Observable<UserStory> {
     return this.http.put<UserStory>(`${this.resourcePath()}/${id}`, item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
@@ -53,6 +54,26 @@ export class UserStoriesService {
     return this.http.get<UserStory[]>(this.resourcePath(), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
+
+  addTask(userStoryId: number, task: Task): Observable<UserStory> {
+    return this.http.post<UserStory>(
+      `${this.resourcePath()}/${userStoryId}/tasks`,
+      task,
+      this.httpOptions
+    ).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+  }
+
+  updateTask(userStoryId: number, taskId: number, updatedData: any): Observable<any> {
+    return this.http.put(`/userStories/${userStoryId}/tasks/${taskId}`, updatedData)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   private resourcePath(): string {
     return `${this.basePath}${this.resourceEndpoint}`;

@@ -40,7 +40,33 @@
 .add-item{
   background-color: transparent;
   border: none;
+  border-radius: 100%;
+  width: 2.4rem;
+  height:2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  color: #6e6e6e;
 }
+
 .add-item:hover{
+  cursor: pointer;
+  background-color: #ededed;
+  rotate: 90deg;
+}
+
+.add-item:active{
+  cursor: pointer;
+  background-color: #cccccc;
+}
+
+.delete-button{
+  border: none;
+  color: red;
+  background-color: transparent;
+}
+.delete-button:hover{
+  color: brown;
   cursor: pointer;
 }

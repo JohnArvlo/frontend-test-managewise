@@ -1,28 +1,41 @@
 <mat-card id="product-backlog-card">
   <h6>Product Backlog</h6>
-  <mat-card *ngFor="let userStory of filteredUserStories" class="us-card">
+  <mat-card *ngFor="let userStory of productBacklog" class="us-card">
     <div class="us-container">
       <span>US{{ userStory.id }}</span>
       <span>{{ userStory.title }}</span>
       <span>{{ userStory.status }}</span>
+      <button class="add-item" (click)="onAddUserStory(userStory)"><mat-icon>add</mat-icon></button>
     </div>
   </mat-card>
 </mat-card>
 
 <br><br><br>
 
+<!--parte sprint backlog-->
+
 <mat-card id="sprint-backlog-card">
   <div class="sprint-header">
     <h6>Sprint Backlog</h6>
-    <button class="start-sprint">Start Sprint</button>
+    <mat-form-field appearance="fill">
+      <mat-label>Título del Sprint</mat-label>
+      <input matInput [(ngModel)]="newSprint.title" placeholder="Ingresa el título">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Meta del Sprint</mat-label>
+      <input matInput [(ngModel)]="newSprint.goal" placeholder="Ingresa la meta">
+    </mat-form-field>
+
+    <button class="start-sprint" (click)="createSprint()">Start Sprint</button>
   </div>
-  <mat-card *ngFor="let userStory of userStories" class="us-card">
+  <mat-card *ngFor="let userStory of sprintBacklog" class="us-card">
     <div class="us-container">
       <span>US{{ userStory.id }}</span>
       <span>{{ userStory.title }}</span>
       <span>{{ userStory.status }}</span>
-      <button>X</button>
+      <button class="delete-button" (click)="onDeleteUserStory(userStory)"><mat-icon>delete</mat-icon></button>
     </div>
   </mat-card>
-  <button class="add-item">+ Add an item</button>
+  <!--<button class="add-item">+ Add an item</button>-->
 </mat-card>

@@ -1,33 +1,32 @@
+import { Task } from './task.entity';
+
 export class UserStory {
   id: number;
   title: string;
   description: string;
-  owner: string;
-  status: 'Pending' | 'In Progress' | 'Complete';
-  sprint: number | null;  // El sprint puede ser nulo si aún no ha sido asignado
-  startDate: Date;
-  endDate: Date;
+  status: 'to_do' | 'in_progress' | 'done'; // Cambié los estados para que coincidan con el JSON
+  epicId: number; // Vinculación de la User Story con una Epic
+  sprintBacklogId: number | null; // Cambiado a sprintBacklogId
   effort: number;
+  tasks: Task[]; // Array de tareas
 
   constructor(
-    id: number = 0,  // Si es una nueva historia de usuario, se asigna 0 al id
+    id: number = 0,
     title: string = '',
     description: string = '',
-    owner: string = '',
-    status: 'Pending' | 'In Progress' | 'Complete' = 'Pending',
-    sprint: number | null = null,  // Sprint por defecto es nulo
-    startDate: Date = new Date(),
-    endDate: Date = new Date(),
-    effort: number = 0
+    status: 'to_do' | 'in_progress' | 'done' = 'to_do',
+    epicId: number = 0,
+    sprintBacklogId: number | null = null,
+    effort: number = 0,
+    tasks: Task[] = [] // Inicializa tasks como un array vacío
   ) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.owner = owner;
     this.status = status;
-    this.sprint = sprint;
-    this.startDate = startDate;
-    this.endDate = endDate;
+    this.epicId = epicId;
+    this.sprintBacklogId = sprintBacklogId;
     this.effort = effort;
+    this.tasks = tasks; // Inicializa tasks
   }
 }

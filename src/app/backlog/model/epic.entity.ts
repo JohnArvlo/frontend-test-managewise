@@ -1,24 +1,18 @@
 export class Epic {
   id: number;
   title: string;
-  projectId: number;
   description: string;
-  status: 'Pending' | 'In Progress' | 'Complete';
-  creationDate: Date;
+  status: 'to_do' | 'in_progress' | 'done';
 
   constructor(
     id: number,
     title: string,
-    projectId: number,
     description: string,
-    status: 'Pending' | 'In Progress' | 'Complete',
-    creationDate: Date
+    status: 'to_do' | 'in_progress' | 'done' = 'to_do',
   ) {
     this.id = id;
     this.title = title;
-    this.projectId = projectId;
     this.description = description;
     this.status = status;
-    this.creationDate = creationDate;
   }
 }

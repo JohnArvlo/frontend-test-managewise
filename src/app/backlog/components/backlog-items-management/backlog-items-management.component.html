@@ -1,74 +1,99 @@
 
-<div class="item-header">
-  <h6>User Stories</h6>
-  <button mat-raised-button class="item-create" (click)="openAddUserStoryForm()">Create</button>
+
+<div class="buttons-container">
+  <button class="select-item-button" (click)='showItem("userStories")'>User Stories</button>
+  <button class="select-item-button" (click)='showItem("epics")'>Epics</button>
+  <button class="select-item-button" (click)='showItem("tasks")'>Tasks</button>
+
 </div>
 
-<div class="us-section">
-<mat-card *ngFor="let userStory of userStories" class="us-card">
-  <div class="us-container">
-    <mat-card-header><span>US{{ userStory.id }}</span></mat-card-header>
-    <span>Title: {{ userStory.title }}</span> <br>
-    <span>Description: {{ userStory.description }}</span> <br>
-    <span>Owner: {{ userStory.owner }}</span> <br>
-    <span>Status: {{ userStory.status }}</span> <br>
-    <span>Sprint: {{ userStory.sprint }}</span> <br>
-    <span>Start Date: {{ userStory.startDate }}</span> <br>
-    <span>End Date: {{ userStory.endDate }}</span> <br>
-    <span>Effort: {{ userStory.effort }}</span>
-    <div class="card-footer-container">
-      <button mat-raised-button (click)="deleteUserStory(userStory)">Delete</button>
-      <button> Edit </button>
-      <button> Add to an epic </button>
-    </div>
+<div *ngIf='backogItem=="userStories"'>
+
+  <div class="item-header">
+    <h6>User Stories</h6>
+    <button mat-raised-button class="item-create" (click)="openAddUserStoryForm()">Create</button>
   </div>
-</mat-card>
-</div>
 
-
-<div class="item-header">
-  <h6>Epics</h6>
-  <button class="item-create">Create</button>
-</div>
-
-<div class="us-section">
-  <mat-card *ngFor="let epic of epics" class="us-card">
+  <div class="us-section">
+  <mat-card *ngFor="let userStory of userStories" class="us-card">
     <div class="us-container">
-      <mat-card-header><span>EP{{ epic.id }}</span> <br></mat-card-header>
-      <span>Title: {{ epic.title }}</span> <br>
-      <span>Description: {{ epic.description }}</span> <br>
-      <span>Project: {{ epic.projectId }}</span> <br>
-      <span>Status: {{ epic.status }}</span> <br>
-      <span>Creation Date: {{ epic.creationDate }}</span>
-      <div class="card-footer-container">
-        <button>Delete</button>
-        <button> Edit </button>
-        <button> Show user stories </button>
+      <div class="card-header">
+        <span>US{{ userStory.id }}</span>
+        <div>
+          <button mat-raised-button (click)="openEditUserStoryForm(userStory)" class="edit-button"> <mat-icon>edit</mat-icon> </button>
+          <button (click)="onDeleteUserStory(userStory)" class="delete-button"><mat-icon>delete</mat-icon></button>
+        </div>
       </div>
+      <span>Title: {{ userStory.title }}</span> <br>
+      <span>Description: {{ userStory.description }}</span> <br>
+      <span *ngIf='userStory.status=="to_do"' style="color: red">Status: To Do</span>
+      <span *ngIf='userStory.status=="in_progress"' style="color: darkblue">Status: In Progress </span>
+      <span *ngIf='userStory.status=="done"' style="color: green">Status: Done </span>
+      <br>
+      <span>Effort: {{ userStory.effort }}</span><br>
+      <span>Epic: {{ userStory.epicId }}</span>
+
+      <br>
     </div>
   </mat-card>
+  </div>
+
 </div>
 
-<div class="item-header">
-  <h6>Tasks</h6>
-  <button class="item-create">Create</button>
-</div>
 
-<div class="us-section">
-  <mat-card *ngFor="let task of tasks" class="us-card">
-    <div class="us-container">
-      <mat-card-header><span>TS{{ task.id }}</span> <br></mat-card-header>
-      <span>Title: {{ task.title }}</span> <br>
-      <span>Description: {{ task.description }}</span> <br>
-      <span>Status: {{ task.status }}</span> <br>
-      <span>Creation Date: {{ task.creationDate }}</span> <br>
-      <span>User Story: {{ task.userStoryId }}</span> <br>
-      <span>Sprint: {{ task.sprint }}</span> <br>
-      <div class="card-footer-container">
-        <button>Delete</button>
-        <button> Edit </button>
-        <button> Add to an user story </button>
+<div *ngIf='backogItem=="epics"'>
+  <div class="item-header">
+    <h6>Epics</h6>
+    <button mat-raised-button (click)="openAddEpicForm()" class="item-create">Create</button>
+  </div>
+
+  <div class="us-section">
+    <mat-card *ngFor="let epic of epics" class="us-card">
+      <div class="us-container">
+        <div class="card-header">
+          <span>EP{{ epic.id }}</span> <br>
+          <div>
+            <button mat-raised-button (click)="openEditEpicForm(epic)" class="edit-button"> <mat-icon>edit</mat-icon> </button>
+            <button (click)="onDeleteEpic(epic)" class="delete-button"><mat-icon>delete</mat-icon></button>
+          </div>
+        </div>
+        <span>Title: {{ epic.title }}</span> <br>
+        <span>Description: {{ epic.description }}</span> <br>
+        <span *ngIf='epic.status=="to_do"' style="color: red">Status: To Do</span>
+        <span *ngIf='epic.status=="in_progress"' style="color: darkblue">Status: {{ epic.status }}</span>
+        <span *ngIf='epic.status=="done"' style="color: green">Status: {{ epic.status }}</span>
+        <br>
+        <br>
       </div>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
 </div>
+
+
+<div *ngIf='backogItem=="tasks"'>
+  <div class="item-header">
+    <h6>Tasks</h6>
+    <button mat-raised-button (click)="openAddTaskForm()" class="item-create">Create</button>
+  </div>
+
+  <div class="us-section">
+    <mat-card *ngFor="let task of tasks" class="us-card">
+      <div class="us-container">
+        <div class="card-header">
+          <span>TS{{ task.id }}</span> <br>
+          <div>
+            <button mat-raised-button (click)="openEditTaskForm(task)" class="edit-button"> <mat-icon>edit</mat-icon> </button>
+            <!--<button (click)="onDeleteTask(task)" class="delete-button"><mat-icon>delete</mat-icon></button>-->
+          </div>
+        </div>
+        <span>Title: {{ task.title }}</span> <br>
+        <span>Description: {{ task.description }}</span> <br>
+        <span *ngIf='task.status=="to_do"' style="color: red">Status: To Do</span>
+        <span *ngIf='task.status=="in_progress"' style="color: darkblue">Status: In Progress </span>
+        <span *ngIf='task.status=="done"' style="color: green">Status: Done </span>
+        <br>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
