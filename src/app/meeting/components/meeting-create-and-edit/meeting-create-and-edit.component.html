@@ -1,0 +1,58 @@
+<form (submit)="onSubmit()" #resourceForm='ngForm' class="form-row">
+  <mat-dialog-content>
+    <button mat-icon-button mat-dialog-close class="dialog-button-close">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h4 mat-dialog-title>{{ editMode ? 'Editar Reunión' : 'Nueva Reunión' }}</h4>
+
+    <mat-form-field>
+      <input matInput placeholder="ID" name="ID" required [(ngModel)]="meeting.id" [disabled]="true">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" name="DATE" required [(ngModel)]="meeting.date" [ngModelOptions]="{standalone: true}" (dateChange)="formatDate()" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Seleccione la Hora</mat-label>
+      <input
+        matInput
+        type="text"
+        name="TIME"
+        required
+        [(ngModel)]="meeting.time"
+        placeholder="hh:mm AM/PM"
+        (input)="validateTime($event)"
+        pattern="^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$"
+        title="Formato: hh:mm AM/PM"
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="link" name="link" required [(ngModel)]="meeting.link" [disabled]="!editMode">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="TÍTULO"
+        name="TITLE"
+        required
+        [(ngModel)]="meeting.title"
+        [disabled]="editMode"
+      >
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary">
+      <mat-icon>{{ editMode ? 'update' : 'save' }}</mat-icon> {{ editMode ? 'Actualizar' : 'Agregar' }}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+      <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+  </mat-dialog-actions>
+</form>
