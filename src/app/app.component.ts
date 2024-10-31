@@ -34,17 +34,17 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSidenav, { static: true }) sidenav!: MatSidenav;
 
   options = [
-    { path: '/project', title: 'Project' }
+    { path: '/project', title: 'Project' },
   ];
 
   otherOptions = [
     { icon: 'https://cdn-icons-png.flaticon.com/512/87/87578.png', path: '/statistics', title: 'Statistics' },
     { icon: 'https://i.imgur.com/X51XVUz.png', path: '/backlog', title: 'Backlog' },
     { icon: 'https://i.imgur.com/kP7elFc.png', path: '/board', title: 'Board' },
-    { icon: 'https://i.imgur.com/xQxGLrm.png', path: '/reports', title: 'Reports' },
+    { icon: 'https://i.imgur.com/xQxGLrm.png', path: '/issues', title: 'Reports' },
     { icon: 'https://i.imgur.com/XkRHbGU.png', path: '/members', title: 'Members' },
     { icon: 'https://i.imgur.com/n1IHpmx.png', path: '/meeting', title: 'Meeting' },
-    { icon: 'https://i.imgur.com/GWdot6x.png', path: '/settings', title: 'Configuración' }
+    { icon: 'https://i.imgur.com/GWdot6x.png', path: '/settings', title: 'Configuración' },
   ];
 
   constructor(

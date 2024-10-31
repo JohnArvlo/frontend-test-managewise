@@ -1,43 +1,61 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment'; // Adjust the path if necessary
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+
+import { environment } from "../../../environments/environment";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { catchError, Observable, retry, throwError } from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class BaseService<T> {
-  basePath: string = `${environment.serverBasePath}`; // Use your environment variable for the base path
-  resourceEndpoint: string = '/resources'; // Adjust as needed
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json',
-    }),
-  };
+    basePath: string = `${environment.serverBasePath}`;
+    resourceEndpoint: string = '/resources';
 
-  constructor(private http: HttpClient) {}
-
-  handleError(error: HttpErrorResponse) {
-    // Default error handling
-    if (error.error instanceof ErrorEvent) {
-      console.log(`An error occurred: ${error.error.message}`);
-    } else {
-      // Unsuccessful Response Error Code returned from Backend
-      console.log(`Backend returned code ${error.status}, body was: ${error.error}`);
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+      })
     }
-    return throwError(() => new Error('Something happened with the request; please try again later.'));
-  }
 
-  // Example method to get all resources
-  getAllResources(): Observable<T[]> {
-    return this.http
-      .get<T[]>(`${this.basePath}${this.resourceEndpoint}`, this.httpOptions)
-      .pipe(
-        retry(1), // Retry once before throwing error
-        catchError(this.handleError.bind(this)) // Bind this for context
-      );
-  }
+    constructor(private http: HttpClient) {  }
 
-  // You can add more methods as needed, like get, post, put, delete, etc.
+    handleError(error: HttpErrorResponse) {
+      // Default error handling
+      if (error.error instanceof ErrorEvent) {
+        console.log(`An error occurred ${error.error.message}`);
+      } else {
+        // Unsuccessful Response Error Code returned from Backend
+        console.log(`Backend returned code ${error.status}, body was ${error.error}`);
+      }
+      return throwError(() => new Error('Something happened with request, please try again later'));
+    }
+
+    // Create Resource
+    create(item: any): Observable<T> {
+      return this.http.post<T>(this.resourcePath(), JSON.stringify(item), this.httpOptions)
+        .pipe(retry(2), catchError(this.handleError));
+    }
+
+    // Delete Resource
+    delete(id: any) {
+      return this.http.delete(`${this.resourcePath()}/${id}`, this.httpOptions)
+        .pipe(retry(2), catchError(this.handleError));
+    }
+
+    // Update Resource
+    update(id: any, item: any): Observable<T> {
+      return this.http.put<T>(`${this.resourcePath()}/${id}`, JSON.stringify(item), this.httpOptions)
+        .pipe(retry(2), catchError(this.handleError));
+    }
+
+    // Get All Resources
+    getAll(): Observable<T> {
+      return this.http.get<T>(this.resourcePath(), this.httpOptions)
+        .pipe(retry(2), catchError(this.handleError));
+    }
+
+    private resourcePath(): string {
+      return `${this.basePath}${this.resourceEndpoint}`;
+    }
 }
