@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { environment } from "../../../environments/environment";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable, retry, throwError } from "rxjs";
-
-import { Task } from "../model/task.entity";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, retry, throwError } from 'rxjs';
+import { Task } from '../model/task.entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-  basePath: string = `${environment.serverBasePath}`;
-  resourceEndpoint: string = '/tasks';  // Ajusta el endpoint según sea necesario
+  basePath: string = 'https://my-json-server.typicode.com/JohnArvlo/db-backlog';
+  resourceEndpoint: string = '/tasks';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,25 +27,25 @@ export class TasksService {
     return throwError(() => new Error('Something happened with the request; please try again later.'));
   }
 
-  // Create Resource
+  // Crear recurso
   create(item: Task): Observable<Task> {
     return this.http.post<Task>(this.resourcePath(), item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Delete Resource
+  // Eliminar recurso
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.resourcePath()}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Update Resource
+  // Actualizar recurso
   update(id: number, item: Task): Observable<Task> {
     return this.http.put<Task>(`${this.resourcePath()}/${id}`, item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Get All Resources
+  // Obtener todos los recursos
   getAll(): Observable<Task[]> {
     return this.http.get<Task[]>(this.resourcePath(), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));

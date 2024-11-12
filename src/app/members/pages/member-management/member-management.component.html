@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Equipo del proyecto</h2>
+  <button mat-raised-button class="custom-button" (click)="openAddMemberDialog()">Agregar nuevo miembro al proyecto</button>
+  <br>
+  <br><br>
+  <div class="issue-list">
+    <mat-card *ngFor="let member of members" class="issue-card">
+      <!-- Accediendo al nombre completo desde personName -->
+      <mat-card-content>
+        <mat-card-title><strong>Nombre: </strong> {{ member.personName.firstName }}, {{ member.personName.lastName }}</mat-card-title>
+        <p><strong>Rol:</strong> {{ member.role }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ member.email.email }}</p>
+        <p><strong>Dirección:</strong> {{ member.address.street }}, {{ member.address.city }}, {{ member.address.country }}</p>
+      </mat-card-content>
+
+      <mat-card-actions class="card-actions">
+        <button mat-raised-button color="accent" class="edit-button" (click)="openEditMemberDialog(member)">Editar</button>
+        <button mat-raised-button color="warn" class="delete-button" (click)="deleteMember(member)">Eliminar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

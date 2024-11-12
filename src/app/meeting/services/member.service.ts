@@ -8,7 +8,7 @@ import { BaseService } from '../../meeting/services/base.service'; // Si necesit
   providedIn: 'root'
 })
 export class MemberService {
-  private apiUrl = 'http://localhost:3000/members'; // Cambia esto a la URL correcta
+  private apiUrl = 'https://my-json-server.typicode.com/soyvalzzz/horizonmana-meeting/members';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class MemberService {
     return this.http.get<Member[]>(this.apiUrl);
   }
 
-  // Actualizar miembros en bloque
+  // Actualizar miembros en bloque (recuerda que My JSON Server no soporta esta funcionalidad)
   updateMembers(members: Member[]): Observable<Member[]> {
     return this.http.put<Member[]>(`${this.apiUrl}/bulk-update`, members);
   }

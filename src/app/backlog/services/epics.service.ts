@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from "../../../environments/environment";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { catchError, Observable, retry, throwError } from "rxjs";
 
@@ -9,8 +8,8 @@ import { Epic } from "../model/epic.entity";
   providedIn: 'root'
 })
 export class EpicsService {
-  basePath: string = `${environment.serverBasePath}`;
-  resourceEndpoint: string = '/epics';  // Ajusta el endpoint según sea necesario
+  basePath: string = 'https://my-json-server.typicode.com/JohnArvlo/db-backlog';
+  resourceEndpoint: string = '/epics';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,25 +28,25 @@ export class EpicsService {
     return throwError(() => new Error('Something happened with the request; please try again later.'));
   }
 
-  // Create Resource
+  // Crear recurso
   create(item: Epic): Observable<Epic> {
     return this.http.post<Epic>(this.resourcePath(), item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Delete Resource
+  // Eliminar recurso
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.resourcePath()}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Update Resource
+  // Actualizar recurso
   update(id: number, item: Epic): Observable<Epic> {
     return this.http.put<Epic>(`${this.resourcePath()}/${id}`, item, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Get All Resources
+  // Obtener todos los recursos
   getAll(): Observable<Epic[]> {
     return this.http.get<Epic[]>(this.resourcePath(), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
