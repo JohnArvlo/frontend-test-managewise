@@ -7,6 +7,7 @@
 import { IssuesListComponent } from "./issue/pages/issues-list/issues-list.component";
 import { MeetingManagementComponent } from './meeting/pages/meeting-management/meeting-management.component'; // Cambia TimeLine a Timeline
 import { RecordingManagementComponent } from './meeting/components/recording-management/recording-management.component'; // Cambia TimeLine a Timeline
+import { MemberManagementComponent } from "./members/pages/member-management/member-management.component";
 
   export const routes: Routes = [
     { path: 'statistics', component: StatisticsPageComponent },
@@ -14,6 +15,7 @@ import { RecordingManagementComponent } from './meeting/components/recording-man
     { path: 'backlog', component: BacklogPageComponent },
     { path: 'backlog-items', component: BacklogItemsPageComponent },
     { path: 'issues', component: IssuesListComponent },
+    { path: 'members', component: MemberManagementComponent },
     { path: 'meeting', component: MeetingManagementComponent },
 { path: 'recordings', component: RecordingManagementComponent},
     { path: '', redirectTo: 'project', pathMatch: 'full' }, // Redirección por defecto

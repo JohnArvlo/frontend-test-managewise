@@ -127,7 +127,7 @@ export class MeetingManagementComponent implements OnInit {
 
   // Método para abrir la sección de grabaciones
   openRecordings(): void {
-    window.open('http://localhost:4200/recordings', '_blank');
+    window.open('/recordings', '_blank');
   }
 
   // Lifecycle Hooks

@@ -1,17 +1,14 @@
-import { Injectable } from '@angular/core';
-
-import { environment } from "../../../environments/environment";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable, retry, throwError } from "rxjs";
-import { inject } from "@angular/core";
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService<T> {
-
-  basePath: string = `${environment.serverBasePath}`;
-  resourceEndpoint: string = '/resources';
+  // Cambia la URL base al endpoint del servidor JSON
+  basePath: string = 'https://my-json-server.typicode.com/soyvalzzz/horizonmana-meeting';
+  resourceEndpoint: string = '/resources'; // Ajusta este endpoint si es necesario
 
   private http: HttpClient = inject(HttpClient);
 
@@ -22,37 +19,35 @@ export class BaseService<T> {
   }
 
   handleError(error: HttpErrorResponse) {
-    // Default error handling
     if (error.error instanceof ErrorEvent) {
-      console.log(`An error occurred ${error.error.message}`);
+      console.log(`An error occurred: ${error.error.message}`);
     } else {
-      // Unsuccessful Response Error Code returned from Backend
-      console.log(`Backend returned code ${error.status}, body was ${error.error}`);
+      console.log(`Backend returned code ${error.status}, body was: ${error.error}`);
     }
-    return throwError(() => new Error('Something happened with request, please try again later'));
+    return throwError(() => new Error('Something went wrong with the request; please try again later.'));
   }
 
-  // Create Resource
+  // Método para crear un recurso
   create(item: any): Observable<T> {
     return this.http.post<T>(this.resourcePath(), JSON.stringify(item), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Delete Resource
-  delete(id: any) {
-    return this.http.delete(`${this.resourcePath()}/${id}`, this.httpOptions)
+  // Método para eliminar un recurso
+  delete(id: any): Observable<void> {
+    return this.http.delete<void>(`${this.resourcePath()}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Update Resource
+  // Método para actualizar un recurso
   update(id: any, item: any): Observable<T> {
     return this.http.put<T>(`${this.resourcePath()}/${id}`, JSON.stringify(item), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // Get All Resources
-  getAll(): Observable<T> {
-    return this.http.get<T>(this.resourcePath(), this.httpOptions)
+  // Método para obtener todos los recursos
+  getAll(): Observable<T[]> { // Cambiado a T[] para reflejar una lista de recursos
+    return this.http.get<T[]>(this.resourcePath(), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 

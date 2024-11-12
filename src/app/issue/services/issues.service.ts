@@ -10,6 +10,7 @@ import { Issue } from "../model/issue.entity";
 export class IssuesService extends BaseService<Issue> {
   constructor(private httpClient: HttpClient) {
     super(httpClient);
+    this.basePath = 'https://my-json-server.typicode.com/estefanojaque/Managewise-reportes'; // Updated basePath
     this.resourceEndpoint = '/issues';
   }
 
@@ -18,12 +19,12 @@ export class IssuesService extends BaseService<Issue> {
     return this.httpClient.get<Issue[]>(`${this.basePath}${this.resourceEndpoint}`, this.httpOptions);
   }
 
-   deleteIssue(id: number): Observable<void> {
-         return this.httpClient.delete<void>(`${this.basePath}${this.resourceEndpoint}/${id}`, this.httpOptions);
-       }
+  deleteIssue(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.basePath}${this.resourceEndpoint}/${id}`, this.httpOptions);
+  }
 
   // Método específico para actualizar un issue existente
-    override update(id: number, issue: Issue): Observable<Issue> {
-      return this.httpClient.put<Issue>(`${this.basePath}${this.resourceEndpoint}/${id}`, issue, this.httpOptions);
-    }
+  override update(id: number, issue: Issue): Observable<Issue> {
+    return this.httpClient.put<Issue>(`${this.basePath}${this.resourceEndpoint}/${id}`, issue, this.httpOptions);
+  }
 }
