@@ -1,29 +1,30 @@
-import { Component, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MembersService } from '../../services/members.service';
 import { Member } from '../../model/member.entity';
-
-// Importa los módulos necesarios para que Angular reconozca los elementos de Angular Material
-import { MatCardModule } from '@angular/material/card'; // Para mat-card
-import { MatDialogModule } from '@angular/material/dialog'; // Para mat-dialog-content
-import { MatFormFieldModule } from '@angular/material/form-field'; // Para mat-form-field
-import { MatInputModule } from '@angular/material/input'; // Para mat-input
-import { FormsModule } from '@angular/forms'; // Para usar ngModel
+import { PersonName } from '../../model/person-name.entity'; // Asegúrate de importar PersonName correctamente
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-member-create-and-edit',
   templateUrl: './member-create-and-edit.component.html',
   styleUrls: ['./member-create-and-edit.component.css'],
-  standalone: true, // Esto hace que el componente sea autónomo
+  standalone: true,
   imports: [
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
-  ] // Aquí importamos todos los módulos necesarios directamente en el componente
+    FormsModule,
+    CommonModule // Asegúrate de incluir CommonModule
+  ]
 })
-export class MemberCreateAndEditComponent {
+export class MemberCreateAndEditComponent implements OnInit {
   newMember: Member = new Member();
   isLoading: boolean = false;
   errorMessage: string = '';
@@ -31,46 +32,81 @@ export class MemberCreateAndEditComponent {
   constructor(
     private membersService: MembersService,
     private dialogRef: MatDialogRef<MemberCreateAndEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Member // Recibe los datos del miembro
-  ) {
-    // Si hay datos (para editar), se inicializa 'newMember' con esos datos
-    if (data) {
-      this.newMember = { ...data };
+    @Inject(MAT_DIALOG_DATA) public data: Member
+  ) {}
+
+  ngOnInit(): void {
+    if (this.data) {
+      this.newMember = { ...this.data };
+    }
+
+    // Asegúrate de que 'personName' sea una instancia de la clase PersonName
+    if (!this.newMember.personName) {
+      this.newMember.personName = new PersonName(''); // Inicializar como una instancia de PersonName
+    }
+    if (!this.newMember.email) {
+      this.newMember.email = { email: '' }; // Inicializar 'email' si es necesario
+    }
+    if (!this.newMember.address) {
+      this.newMember.address = { streetAddress: '' }; // Inicializar 'address' si es necesario
+    }
+    if (!this.newMember.role) {
+      this.newMember.role = ''; // Inicializar 'role' si es necesario
     }
   }
 
+  // Método para enviar los datos (crear o editar)
   onSubmit(): void {
     this.isLoading = true;
     if (this.newMember.id) {
       // Lógica de actualización
       this.membersService.update(this.newMember.id, this.newMember).subscribe({
-        next: () => {
+        next: (updatedMember) => {
           this.isLoading = false;
-          this.dialogRef.close(true); // Cerrar el diálogo y pasar true
+          this.dialogRef.close(updatedMember); // Retornamos el miembro actualizado
         },
-        error: (err) => {
+        error: (err: any) => {
           this.isLoading = false;
-          this.errorMessage = 'Error updating member. Please try again.';
-          console.error('Error updating member:', err);
+          this.errorMessage = `Error al actualizar el miembro: ${err.message || 'No se pudo actualizar el miembro'}`;
+          console.error('Error al actualizar el miembro:', err);
         }
       });
     } else {
       // Lógica de creación
       this.membersService.create(this.newMember).subscribe({
-        next: () => {
+        next: (createdMember) => {
           this.isLoading = false;
-          this.dialogRef.close(true); // Cerrar el diálogo y pasar true
+          this.dialogRef.close(createdMember); // Retornamos el miembro creado
         },
-        error: (err) => {
+        error: (err: any) => {
           this.isLoading = false;
-          this.errorMessage = 'Error creating member. Please try again.';
-          console.error('Error creating member:', err);
+          this.errorMessage = `Error al crear el miembro: ${err.message || 'No se pudo crear el miembro'}`;
+          console.error('Error al crear el miembro:', err);
         }
       });
     }
   }
 
+  // Método para cancelar la acción
   onCancel(): void {
-    this.dialogRef.close(false); // Cerrar el diálogo sin realizar ninguna acción
+    this.dialogRef.close(false);
+  }
+
+  // Método para eliminar un miembro
+  onDelete(): void {
+    if (this.newMember.id) {
+      this.isLoading = true;
+      this.membersService.delete(this.newMember.id).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.dialogRef.close({ deleted: true, memberId: this.newMember.id }); // Indicamos que el miembro fue eliminado
+        },
+        error: (err: any) => {
+          this.isLoading = false;
+          this.errorMessage = `Error al eliminar el miembro: ${err.message || 'No se pudo eliminar el miembro'}`;
+          console.error('Error al eliminar el miembro:', err);
+        }
+      });
+    }
   }
 }

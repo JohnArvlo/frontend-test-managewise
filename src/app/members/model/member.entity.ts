@@ -12,7 +12,7 @@ export class Member {
 
     constructor() {
         this.id = 0;
-        this.personName = new PersonName('', '');  // Asigna un nuevo objeto PersonName
+        this.personName = new PersonName('');  // Asigna un nuevo objeto PersonName
         this.email = new Email();
         this.address = new Address();
         this.role = '';  // Define como una cadena vacía si el rol es solo texto

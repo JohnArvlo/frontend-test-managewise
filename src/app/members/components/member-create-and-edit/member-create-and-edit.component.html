@@ -1,15 +1,8 @@
 <!-- Primer nombre -->
 <mat-form-field appearance="fill">
-  <mat-label>First Name</mat-label>
-  <input matInput [(ngModel)]="newMember.personName.firstName" name="firstName" required>
+  <mat-label>Full Name</mat-label>
+  <input matInput [(ngModel)]="newMember.personName.fullName" name="fullName" required>
 </mat-form-field>
-
-<!-- Apellido -->
-<mat-form-field appearance="fill">
-  <mat-label>Last Name</mat-label>
-  <input matInput [(ngModel)]="newMember.personName.lastName" name="lastName" required>
-</mat-form-field>
-
 
 <!-- Correo electrónico -->
 <mat-form-field appearance="fill">
@@ -19,18 +12,8 @@
 
 <!-- Dirección -->
 <mat-form-field appearance="fill">
-  <mat-label>Street</mat-label>
-  <input matInput [(ngModel)]="newMember.address.street" name="street" required>
-</mat-form-field>
-
-<mat-form-field appearance="fill">
-  <mat-label>City</mat-label>
-  <input matInput [(ngModel)]="newMember.address.city" name="city" required>
-</mat-form-field>
-
-<mat-form-field appearance="fill">
-  <mat-label>Country</mat-label>
-  <input matInput [(ngModel)]="newMember.address.country" name="country" required>
+  <mat-label>Street Address</mat-label>
+  <input matInput [(ngModel)]="newMember.address.streetAddress" name="streetAddress" required>
 </mat-form-field>
 
 <!-- Rol -->
@@ -45,4 +28,9 @@
     {{ newMember.id ? 'Update Member' : 'Add Member' }}
   </button>
   <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+</div>
+
+<!-- Botón de eliminar -->
+<div *ngIf="newMember.id">
+  <button mat-raised-button color="warn" (click)="onDelete()" [disabled]="isLoading">Delete Member</button>
 </div>

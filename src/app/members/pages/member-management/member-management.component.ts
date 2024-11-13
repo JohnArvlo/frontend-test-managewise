@@ -25,18 +25,27 @@ export class MemberManagementComponent implements OnInit {
 
   // Método para obtener todos los miembros
   getAllMembers(): void {
-    this.membersService.getAll()
-      .subscribe((response: Member[]) => {
-        console.log(response);
+    this.membersService.getAllMembers().subscribe({
+      next: (response: Member[]) => {
+        console.log('Respuesta de la API:', response); // Verifica que los datos estén correctos
         this.members = response;
-      });
+      },
+      error: (err: any) => {
+        console.error('Error al obtener los miembros:', err);
+      }
+    });
   }
 
   // Método para eliminar un miembro
   deleteMember(member: Member): void {
     if (confirm('¿Estás seguro de que deseas sacarlo del proyecto?')) {
-      this.membersService.delete(member.id).subscribe(() => {
-        this.getAllMembers(); // Recargamos la lista después de eliminar
+      this.membersService.delete(member.id).subscribe({
+        next: () => {
+          this.members = this.members.filter(m => m.id !== member.id); // Actualizar la lista local después de eliminar
+        },
+        error: (err: any) => {
+          console.error('Error al eliminar el miembro:', err);
+        }
       });
     }
   }
@@ -49,7 +58,8 @@ export class MemberManagementComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getAllMembers(); // Recargamos la lista de miembros después de agregar
+        // Agregar el nuevo miembro directamente a la lista local
+        this.members.push(result);
       }
     });
   }
@@ -63,7 +73,11 @@ export class MemberManagementComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getAllMembers(); // Recargamos la lista de miembros después de editar
+        // Actualizar el miembro editado en la lista local
+        const index = this.members.findIndex(m => m.id === result.id);
+        if (index !== -1) {
+          this.members[index] = result; // Reemplazamos el miembro editado en la lista local
+        }
       }
     });
   }

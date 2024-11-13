@@ -1,13 +1,13 @@
 export class PersonName {
-  firstName: string;
-  lastName: string;
+  fullName: string;
 
-  constructor(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+
+  constructor(fullName: string) {
+    this.fullName = fullName;
+
   }
 
   getFullName(): string {
-    return `${this.firstName} ${this.lastName}`;
+    return `${this.fullName}`;
   }
 }
