@@ -23,13 +23,18 @@ export class MemberManagementComponent implements OnInit {
     this.getAllMembers();
   }
 
+  // Método para obtener todos los miembros
   getAllMembers(): void {
-    this.membersService.getAllMembers().subscribe((members: Member[]) => {
-      console.log(members);  // Log the members data to inspect its structure
-      this.members = members;
+    this.membersService.getAllMembers().subscribe({
+      next: (response: Member[]) => {
+        console.log('Respuesta de la API:', response); // Verifica que los datos estén correctos
+        this.members = response;
+      },
+      error: (err: any) => {
+        console.error('Error al obtener los miembros:', err);
+      }
     });
   }
-
 
   // Método para eliminar un miembro
   deleteMember(member: Member): void {

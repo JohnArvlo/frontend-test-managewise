@@ -11,9 +11,9 @@
       <ul>
         <li *ngFor="let member of members" class="member-item">
           <img src="https://cdn-icons-png.flaticon.com/512/1361/1361728.png" alt="Icon" class="member-icon" />
-          <span>{{ member.name }}</span>
+          <span>{{ member.personName.fullName }}</span>
 
-          <span class="member-role">{{ member.role.name }}</span> <!-- Mostrar el rol -->
+          <span class="member-role">{{ member.role }}</span> <!-- Mostrar el rol -->
         </li>
       </ul>
     </div>

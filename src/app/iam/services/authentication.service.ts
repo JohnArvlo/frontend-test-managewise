@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {BehaviorSubject} from "rxjs";
-import {Router} from "@angular/router";
-import {SignInRequest} from "../model/sign-in.request";
-import {SignInResponse} from "../model/sign-in.response";
-import {SignUpRequest} from "../model/sign-up.request";
-import {SignUpResponse} from "../model/sign-up.response";
+import { environment } from "../../../environments/environment";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
+import { Router } from "@angular/router";
+import { SignInRequest } from "../model/sign-in.request";
+import { SignInResponse } from "../model/sign-in.response";
+import { SignUpRequest } from "../model/sign-up.request";
+import { SignUpResponse } from "../model/sign-up.response";
 
 @Injectable({
   providedIn: 'root'

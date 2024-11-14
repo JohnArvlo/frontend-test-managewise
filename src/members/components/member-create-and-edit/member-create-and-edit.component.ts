@@ -47,8 +47,8 @@ export class MemberCreateAndEditComponent implements OnInit {
     if (!this.newMember.email) {
       this.newMember.email = { email: '' }; // Inicializar 'email' si es necesario
     }
-    if (!this.newMember.streetAddress) {
-      this.newMember.streetAddress = { streetAddress: '' }; // Inicializar 'address' si es necesario
+    if (!this.newMember.address) {
+      this.newMember.address = { streetAddress: '' }; // Inicializar 'address' si es necesario
     }
     if (!this.newMember.role) {
       this.newMember.role = ''; // Inicializar 'role' si es necesario

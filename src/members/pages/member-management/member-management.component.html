@@ -10,7 +10,7 @@
         </mat-card-title>
         <p><strong>Rol:</strong> {{ member.role || 'Sin rol' }}</p>
         <p><strong>Correo Electrónico:</strong> {{ member.email.email || 'Sin correo electrónico' }}</p>
-        <p><strong>Dirección:</strong> {{ member.streetAddress.streetAddress || 'Address not available' }}</p>
+        <p><strong>Dirección:</strong> {{ member.address.streetAddress || 'Sin dirección' }}</p>
       </mat-card-content>
       <mat-card-actions class="card-actions">
         <button mat-raised-button color="accent" class="edit-button" (click)="openEditMemberDialog(member)">Editar</button>

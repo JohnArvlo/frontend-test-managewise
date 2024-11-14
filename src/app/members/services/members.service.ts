@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Member } from '../model/member.entity';
 
@@ -7,31 +7,38 @@ import { Member } from '../model/member.entity';
   providedIn: 'root',
 })
 export class MembersService {
-  // URL correcta para los miembros
-  private apiUrl = 'https://my-json-server.typicode.com/CB-Sergio-AGV/members/members';
+  private apiUrl = 'http://localhost:8095/api/v1/members';
 
   constructor(private http: HttpClient) {}
 
-  // Método para obtener todos los miembros
-  getAllMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.apiUrl);
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : ''  // Si no hay token, no se incluye
+    });
   }
 
-  // Método para crear un nuevo miembro
+  // Método para obtener todos los miembros
+  getAllMembers(): Observable<Member[]> {
+    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
+    return this.http.get<Member[]>(this.apiUrl, { headers });
+  }
+
   create(member: Member): Observable<Member> {
-    // Asegúrate de que el miembro tiene un ID cuando se crea
-    return this.http.post<Member>(this.apiUrl, member);
+    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
+    return this.http.post<Member>(this.apiUrl, member, { headers });
   }
 
   // Método para actualizar un miembro
   update(id: number, member: Member): Observable<Member> {
-    // La URL para la actualización debe incluir el id del miembro
-    return this.http.put<Member>(`${this.apiUrl}/${id}`, member);
+    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
+    return this.http.put<Member>(`${this.apiUrl}/${id}`, member, { headers });
   }
 
   // Método para eliminar un miembro
   delete(id: number): Observable<void> {
-    // La URL para la eliminación debe incluir el id del miembro
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 }
