@@ -11,6 +11,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthenticationSectionComponent } from './iam/components/authentication-section/authentication-section.component';
+import { AuthenticationService } from './iam/services/authentication.service';
+
+
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -24,17 +30,19 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatSidenavModule,
     LanguageSwitcherComponent,
-    CommonModule
+    CommonModule,
+    AuthenticationSectionComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'ManageWise';
+  isSignedIn: boolean = false;
   @ViewChild(MatSidenav, { static: true }) sidenav!: MatSidenav;
 
   options = [
-    { path: '/project', title: 'Project' },
+    { path: '/authentication', title: 'Authentication' },
   ];
 
   otherOptions = [
@@ -49,13 +57,30 @@ export class AppComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private observer: BreakpointObserver
+    private observer: BreakpointObserver,
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
+    // Configuración de traducción
     translate.setDefaultLang('en');
     translate.use('en');
   }
 
   ngOnInit(): void {
+    // Observando el estado de la autenticación
+    this.authenticationService.isSignedIn.subscribe(
+      (isSignedIn) => {
+        this.isSignedIn = isSignedIn;
+        // Si el usuario no está autenticado, redirigimos a la página de inicio de sesión
+        if (!isSignedIn) {
+          this.router.navigate(['/sign-in']);
+        } else {
+          this.router.navigate(['/home']); // O redirige a otra ruta principal
+        }
+      }
+    );
+
+    // Configuración de la vista de Sidenav dependiendo del tamaño de la pantalla
     this.observer.observe(['(max-width: 1280px)']).subscribe((response) => {
       if (response.matches) {
         this.sidenav.mode = 'over';
@@ -66,4 +91,6 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+
 }
