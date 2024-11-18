@@ -62,8 +62,8 @@ export class StatisticsPageComponent implements OnInit {
         return;
       }
 
-      const inProgress = userStories.filter((story) => story.status === 'To do').length;
-      const complete = userStories.filter((story) => story.status === 'Complete').length;
+      const inProgress = userStories.filter((story) => story.status === 'TO_DO').length;
+      const complete = userStories.filter((story) => story.status === 'COMPLETE').length;
 
       const inProgressValue = Math.min(10, Math.ceil((inProgress / totalStories) * 10));
       const completeValue = Math.min(10, Math.ceil((complete / totalStories) * 10));

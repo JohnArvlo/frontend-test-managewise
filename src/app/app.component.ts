@@ -74,8 +74,6 @@ export class AppComponent implements OnInit {
         // Si el usuario no está autenticado, redirigimos a la página de inicio de sesión
         if (!isSignedIn) {
           this.router.navigate(['/sign-in']);
-        } else {
-          this.router.navigate(['/home']); // O redirige a otra ruta principal
         }
       }
     );

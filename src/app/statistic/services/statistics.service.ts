@@ -5,16 +5,25 @@ import { map } from 'rxjs/operators';
 
 import { Statistics } from '../model/statistic-entity/statistic.entity';
 import { Member } from '../model/member-entity/member.entity';
+import { Sprint } from '../model/statistic-entity/sprint.entity';
+import { environment } from '../../../environments/environment';  // Importa el entorno
 
 @Injectable({
   providedIn: 'root',
 })
 export class StatisticsService {
+  private apiUrl = `${environment.serverBasePath}`;  // Corregido para usar template literal
+
   constructor(private http: HttpClient) {}
 
-  // Método para obtener las User Stories
+  // Método para obtener las User Stories desde la API
   getUserStories(): Observable<Statistics[]> {
-    return this.http.get<Statistics[]>('https://my-json-server.typicode.com/CB-Sergio-AGV/db/userStories');
+    return this.http.get<Statistics[]>(`${this.apiUrl}/user-stories`);
+  }
+
+  // Método para obtener los Sprints desde la API
+  getSprints(): Observable<Sprint[]> {
+    return this.http.get<Sprint[]>(`${this.apiUrl}/sprints`);
   }
 
   // Método para obtener los miembros con token
@@ -27,7 +36,7 @@ export class StatisticsService {
       'Authorization': token ? `Bearer ${token}` : ''
     });
 
-    return this.http.get<Member[]>('http://localhost:8095/api/v1/members', { headers });
+    return this.http.get<Member[]>(`${this.apiUrl}/members`, { headers });
   }
 
   // Método para obtener los roles de los miembros con token
@@ -39,7 +48,7 @@ export class StatisticsService {
       'Authorization': token ? `Bearer ${token}` : ''
     });
 
-    return this.http.get<Member[]>('http://localhost:8095/api/v1/members', { headers }).pipe(
+    return this.http.get<Member[]>(`${this.apiUrl}/members`, { headers }).pipe(
       map(members => members.map(member => member.role))
     );
   }

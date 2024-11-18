@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Member } from '../model/member.entity';
+import { environment } from '../../../environments/environment';  // Asegúrate de usar la ruta correcta
 
 @Injectable({
   providedIn: 'root',
 })
 export class MembersService {
-  private apiUrl = 'http://localhost:8095/api/v1/members';
+  private apiUrl = `${environment.serverBasePath}/members`;  // Usa la URL base desde environment.ts
 
   constructor(private http: HttpClient) {}
 
@@ -25,6 +26,7 @@ export class MembersService {
     return this.http.get<Member[]>(this.apiUrl, { headers });
   }
 
+  // Crear un miembro
   create(member: Member): Observable<Member> {
     const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
     return this.http.post<Member>(this.apiUrl, member, { headers });

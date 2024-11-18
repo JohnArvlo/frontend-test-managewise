@@ -13,18 +13,19 @@ import { SignUpComponent } from './iam/pages/sign-up/sign-up.component';
 import {authenticationGuard} from './iam/services/authentication.guard';
 import {AuthenticationSectionComponent} from './iam/components/authentication-section/authentication-section.component'
   export const routes: Routes = [
-      { path: 'statistics', component: StatisticsPageComponent, canActivate: [authenticationGuard] },
-      { path: 'sign-in', component: SignInComponent },
-      { path: 'sign-up', component: SignUpComponent },
-      { path: 'timeline', component: TimelinePageComponent, canActivate: [authenticationGuard] },
-      { path: 'backlog', component: BacklogPageComponent, canActivate: [authenticationGuard] },
-      { path: 'backlog-items', component: BacklogItemsPageComponent, canActivate: [authenticationGuard] },
-      { path: 'issues', component: IssuesListComponent, canActivate: [authenticationGuard] },
-      { path: 'members', component: MemberManagementComponent, canActivate: [authenticationGuard] },
-      { path: 'meeting', component: MeetingManagementComponent, canActivate: [authenticationGuard] },
-      { path: 'recordings', component: RecordingManagementComponent, canActivate: [authenticationGuard] },
-      { path: 'authentication', component: AuthenticationSectionComponent },  // Página de autenticación
-      { path: '**', component: PageNotFoundComponent }
+    { path: 'statistics', component: StatisticsPageComponent, canActivate: [authenticationGuard] },
+    { path: 'timeline', component: TimelinePageComponent, canActivate: [authenticationGuard] },
+    { path: 'backlog', component: BacklogPageComponent, canActivate: [authenticationGuard] },
+    { path: 'backlog-items', component: BacklogItemsPageComponent, canActivate: [authenticationGuard] },
+    { path: 'issues', component: IssuesListComponent, canActivate: [authenticationGuard] },
+    { path: 'members', component: MemberManagementComponent, canActivate: [authenticationGuard] },
+    { path: 'meeting', component: MeetingManagementComponent, canActivate: [authenticationGuard] },
+    { path: 'recording', component: RecordingManagementComponent },
+    { path: '', component: PageNotFoundComponent },  // Asegúrate de que esta ruta esté definida
+    { path: 'sign-in', component: SignInComponent },
+    { path: 'sign-up', component: SignUpComponent },
+    { path: '**', component: PageNotFoundComponent }
   ];
+
 
 

@@ -17,8 +17,13 @@ Chart.register(...registerables);
 })
 export class StatisticsChartComponent implements OnInit {
   public chart: any;
+  public sprints: any[] = [];  // Array para almacenar los sprints
 
-  constructor(private statisticsService: StatisticsService, private router: Router, private translate: TranslateService) {
+  constructor(
+    private statisticsService: StatisticsService,
+    private router: Router,
+    private translate: TranslateService
+  ) {
     this.translate.setDefaultLang('en');
     this.translate.use('en'); // O 'in'
   }
@@ -27,62 +32,56 @@ export class StatisticsChartComponent implements OnInit {
     this.fetchStatistics();
   }
 
-
   fetchStatistics() {
-    this.statisticsService.getUserStories().subscribe((statistics: Statistics[]) => {
-      const sprintCounts: {
-        [key: number]: {
-          complete: number;
-          inProgress: number;
-          total: number;
-          titlesComplete: { title: string; owner: string }[];
-          titlesInProgress: { title: string; owner: string }[];
-        }
-      } = {
-        1: { complete: 0, inProgress: 0, total: 0, titlesComplete: [], titlesInProgress: [] },
-        2: { complete: 0, inProgress: 0, total: 0, titlesComplete: [], titlesInProgress: [] },
-        3: { complete: 0, inProgress: 0, total: 0, titlesComplete: [], titlesInProgress: [] },
-        4: { complete: 0, inProgress: 0, total: 0, titlesComplete: [], titlesInProgress: [] }
-      };
+    // Obtener los sprints de la API
+    this.statisticsService.getSprints().subscribe((sprints) => {
+      this.sprints = sprints;  // Asignar los sprints al array
 
-      statistics.forEach(stat => {
-        if (stat.sprint >= 1 && stat.sprint <= 4) {
-          if (stat.status === 'Complete') {
-            sprintCounts[stat.sprint].complete++;
-            sprintCounts[stat.sprint].titlesComplete.push({ title: stat.title, owner: stat.owner });
-          } else if (stat.status === 'To do') {
-            sprintCounts[stat.sprint].inProgress++;
-            sprintCounts[stat.sprint].titlesInProgress.push({ title: stat.title, owner: stat.owner });
+      this.statisticsService.getUserStories().subscribe((statistics: Statistics[]) => {
+        const sprintCounts: { [key: number]: { complete: number; inProgress: number; total: number; titlesComplete: { title: string; owner: string }[]; titlesInProgress: { title: string; owner: string }[] } } = {};
+
+        // Inicializar el objeto sprintCounts basado en los sprints dinámicos
+        this.sprints.forEach(sprint => {
+          sprintCounts[sprint.id] = { complete: 0, inProgress: 0, total: 0, titlesComplete: [], titlesInProgress: [] };
+        });
+
+        statistics.forEach(stat => {
+          if (sprintCounts[stat.sprint]) {
+            if (stat.status === 'COMPLETE') {
+              sprintCounts[stat.sprint].complete++;
+              sprintCounts[stat.sprint].titlesComplete.push({ title: stat.title, owner: stat.owner });
+            } else if (stat.status === 'TO_DO') {
+              sprintCounts[stat.sprint].inProgress++;
+              sprintCounts[stat.sprint].titlesInProgress.push({ title: stat.title, owner: stat.owner });
+            }
+            sprintCounts[stat.sprint].total++;
           }
-          sprintCounts[stat.sprint].total++;
-        }
-      });
+        });
 
-      this.createChart(sprintCounts);
+        this.createChart(sprintCounts);
+      });
     });
   }
 
   createChart(sprintCounts: { [key: number]: { complete: number; inProgress: number; total: number; titlesComplete: { title: string; owner: string }[]; titlesInProgress: { title: string; owner: string }[] } }) {
     const ctx = document.getElementById('myStatisticChart') as HTMLCanvasElement;
 
-    const completePercentages = [
-      (sprintCounts[1].total ? (sprintCounts[1].complete / sprintCounts[1].total) * 100 : 0),
-      (sprintCounts[2].total ? (sprintCounts[2].complete / sprintCounts[2].total) * 100 : 0),
-      (sprintCounts[3].total ? (sprintCounts[3].complete / sprintCounts[3].total) * 100 : 0),
-      (sprintCounts[4].total ? (sprintCounts[4].complete / sprintCounts[4].total) * 100 : 0)
-    ];
+    // Generar dinámicamente las etiquetas y los porcentajes según los sprints disponibles
+    const labels = this.sprints.map(sprint => `Sprint ${sprint.id}`);
+    const completePercentages = this.sprints.map(sprint => {
+      const count = sprintCounts[sprint.id];
+      return count ? (count.total ? (count.complete / count.total) * 100 : 0) : 0;
+    });
 
-    const inProgressPercentages = [
-      (sprintCounts[1].total ? (sprintCounts[1].inProgress / sprintCounts[1].total) * 100 : 0),
-      (sprintCounts[2].total ? (sprintCounts[2].inProgress / sprintCounts[2].total) * 100 : 0),
-      (sprintCounts[3].total ? (sprintCounts[3].inProgress / sprintCounts[3].total) * 100 : 0),
-      (sprintCounts[4].total ? (sprintCounts[4].inProgress / sprintCounts[4].total) * 100 : 0)
-    ];
+    const inProgressPercentages = this.sprints.map(sprint => {
+      const count = sprintCounts[sprint.id];
+      return count ? (count.total ? (count.inProgress / count.total) * 100 : 0) : 0;
+    });
 
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4'],
+        labels: labels,  // Usar etiquetas dinámicas de los sprints
         datasets: [
           {
             label: 'Historias Completadas (%)',
@@ -112,7 +111,7 @@ export class StatisticsChartComponent implements OnInit {
             callbacks: {
               title: (tooltipItems) => {
                 const sprintIndex = tooltipItems[0].dataIndex;
-                return `Sprint ${sprintIndex + 1}`;
+                return `Sprint ${this.sprints[sprintIndex].id}`;
               },
               label: (tooltipItem: TooltipItem<'bar'>) => {
                 const datasetLabel = tooltipItem.dataset.label || '';
@@ -121,10 +120,10 @@ export class StatisticsChartComponent implements OnInit {
               },
               afterLabel: (tooltipItem: TooltipItem<'bar'>) => {
                 const sprintIndex = tooltipItem.dataIndex;
-                const sprintData = sprintCounts[sprintIndex + 1];
+                const sprintData = sprintCounts[this.sprints[sprintIndex].id];
 
                 // Determina si es el dataset de "Completadas" o "En Progreso"
-                let titles: { title: string; owner: string }[];
+                let titles: { title: string; owner: string }[] = [];
                 if (tooltipItem.datasetIndex === 0) { // Dataset "Completadas"
                   titles = sprintData.titlesComplete;
                 } else { // Dataset "En Progreso"
@@ -142,7 +141,6 @@ export class StatisticsChartComponent implements OnInit {
           }
         }
       }
-
     });
   }
 

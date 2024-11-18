@@ -125,10 +125,11 @@ export class MeetingManagementComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  // Método para abrir la sección de grabaciones
   openRecordings(): void {
-    window.open('/recordings', '_blank');
+    const baseUrl = window.location.origin;  // Obtiene la URL base
+    window.open(`${baseUrl}/recording`, '_blank');  // Usa la URL completa
   }
+
 
   // Lifecycle Hooks
   ngOnInit(): void {

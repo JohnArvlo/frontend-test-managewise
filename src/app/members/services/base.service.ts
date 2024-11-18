@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, retry, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';  // Importa la configuración de environment
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BaseService<T> {
-  // URL base completa para el servidor JSON
-  protected basePath: string = 'http://localhost:8095/api/v1/members';
+  // Usa la URL base desde environment.ts
+  protected basePath: string = `${environment.serverBasePath}/members`;  // La URL base es dinámica
 
-  // Aquí es donde puedes agregar el token si es necesario
-  private token: string = 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbmRyZSIsImlhdCI6MTczMTU1MTM0NSwiZXhwIjoxNzMyMTU2MTQ1fQ.rTODmyYpswiIzfBegSBYi9Tvh4Az9KvbPxu5Ek0bNUY-SQ0a_zOziHV1rsuUv0WX';
+  private token: string = localStorage.getItem('token') || '';  // Si es necesario, obtén el token desde localStorage
 
-  // Configuración de los encabezados de la solicitud
   protected httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}` // Si es necesario agregar el token
-    })
+    }),
   };
 
   constructor(protected http: HttpClient) {}
@@ -26,10 +25,8 @@ export class BaseService<T> {
   protected handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Error desconocido';
     if (error.error instanceof ErrorEvent) {
-      // Error en el lado del cliente o de la red
       errorMessage = `Error en la solicitud: ${error.error.message}`;
     } else {
-      // Error en la respuesta del servidor
       errorMessage = `Código de error: ${error.status}, Mensaje: ${error.message}`;
     }
     console.error('Error:', errorMessage);

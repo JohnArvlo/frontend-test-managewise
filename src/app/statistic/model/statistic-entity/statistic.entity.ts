@@ -3,10 +3,8 @@ export class Statistics {
   title: string;
   description: string;
   owner: string;
-  status: 'To do' | 'Complete';
+  status: 'TO_DO' | 'COMPLETE';
   sprint: number;
-  startDate: Date;
-  endDate: Date;
   effort: number; // Ensure this property exists
 
   constructor(
@@ -14,10 +12,8 @@ export class Statistics {
     title: string,
     description: string,
     owner: string,
-    status: 'To do' | 'Complete',
+    status: 'TO_DO' | 'COMPLETE',
     sprint: number,
-    startDate: Date,
-    endDate: Date,
     effort: number // Add the effort parameter
   ) {
     this.id = id;
@@ -26,8 +22,6 @@ export class Statistics {
     this.owner = owner;
     this.status = status;
     this.sprint = sprint;
-    this.startDate = startDate;
-    this.endDate = endDate;
     this.effort = effort; // Assign the effort property
   }
 }
