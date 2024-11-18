@@ -12,7 +12,6 @@ export class IssuesService extends BaseService<Issue> {
     super(httpClient);
     this.resourceEndpoint = '/issues';
   }
-
   // Nuevo método específico para IssuesService
   getAllIssues(): Observable<Issue[]> {
     return this.httpClient.get<Issue[]>(`${this.basePath}${this.resourceEndpoint}`, this.httpOptions);
