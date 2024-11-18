@@ -79,3 +79,29 @@
   padding: 0;
 }
 
+.us-tasks-container{
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.us-tasks{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+
+.showmore{
+  background: none;
+  border: none;
+  align-self: center;
+}
+.showmore:hover{
+  cursor: pointer;
+}

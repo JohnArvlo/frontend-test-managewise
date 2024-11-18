@@ -1,26 +1,23 @@
 export class Task {
-  id: number;
+  taskId: number;
   title: string;
   description: string;
-  status: 'to_do' | 'in_progress' | 'done';
+  status:  'TO_DO' | 'IN_PROGRESS' | 'DONE';
   estimation: number;
-  userStoryId: number;
 
   constructor(
-    id: number = 0,
+    taskId: number = 0,
     title: string = '',
     description: string = '',
-    status: 'to_do' | 'in_progress' | 'done' = 'to_do',
+    status: 'TO_DO' | 'IN_PROGRESS' | 'DONE' = 'TO_DO',
     estimation: number = 0,
-    userStoryId: number = 0
 
   ) {
-    this.id = id;
+    this.taskId = taskId;
     this.title = title;
     this.description = description;
     this.status = status;
     this.estimation = estimation;
-    this.userStoryId = userStoryId;
   }
 }
 

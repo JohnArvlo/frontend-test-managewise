@@ -24,7 +24,7 @@ interface EditMemberDialogData { // Cambiado a EditMemberDialogData
     MatDialogModule
   ],
   templateUrl: './edit-participant-dialog.component.html', // Cambia esto
-   styleUrls: ['./edit-participant-dialog.component.css']
+  styleUrls: ['./edit-participant-dialog.component.css']
 })
 export class EditMemberDialogComponent { // Cambiado a EditMemberDialogComponent
   meeting: Meeting;

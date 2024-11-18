@@ -3,8 +3,8 @@ import { Member } from "../model/member.entity"; // Ajusta la ruta según corres
 export class Meeting {
   id: number;
   title: string;
-  date: string;
-  time: string;
+  dateStr: string;
+  timeStr: string;
   link: string;
   recording: {
     recordingLink: string;
@@ -13,14 +13,14 @@ export class Meeting {
   };
   host: number; // Solo el ID del host
 
-  access_code: string;
+  accessCode: string;
   members: number[]; // Agrega esta línea para incluir la propiedad members
 
   constructor() {
     this.id = 0;
     this.title = '';
-    this.date = '';
-    this.time = '';
+    this.dateStr = '';
+    this.timeStr = '';
     this.link = '';
     this.recording = {
       recordingLink: '',
@@ -29,7 +29,7 @@ export class Meeting {
     };
     this.host = 0;
 
-    this.access_code = '';
+    this.accessCode = '';
     this.members = []; // Inicializa members como un array vacío
   }
 }

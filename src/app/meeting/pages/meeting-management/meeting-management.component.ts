@@ -12,9 +12,9 @@ import { MeetingService } from '../../services/meeting.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { MeetingInfoComponent } from '../../components/meeting-info/meeting-info.component';
+import { Router } from '@angular/router';  // Asegúrate de importar Router
 
 import { MemberService } from '../../services/member.service'; // Cambiado a MemberService
-
 
 @Component({
   selector: 'app-meeting-management',
@@ -34,13 +34,14 @@ import { MemberService } from '../../services/member.service'; // Cambiado a Mem
   styleUrls: ['./meeting-management.component.css']
 })
 export class MeetingManagementComponent implements OnInit {
-  // Attributes
+  // Atributos
   meetingData: Meeting;
   meeting!: Array<Meeting>;
   isEditMode: boolean;
 
   private meetingService: MeetingService = inject(MeetingService);
   private matDialog: MatDialog = inject(MatDialog);
+  private router: Router = inject(Router);  // Inyección del Router
 
   // Constructor
   constructor() {
@@ -49,19 +50,29 @@ export class MeetingManagementComponent implements OnInit {
     this.meeting = [];
   }
 
-  // Private Methods
+  // Métodos privados
   private resetEditState(): void {
     this.isEditMode = false;
     this.meetingData = {} as Meeting;
   }
 
-  // CRUD Actions
+  // Acciones CRUD
   private getAllResources(): void {
     this.meetingService.getAll()
       .subscribe((response: any) => {
-        this.meeting = response;
+        this.meeting = response.map((item: Meeting) => {
+          return {
+            ...item,
+            dateStr: this.parseDate(item.dateStr)  // Convertir dateStr a objeto Date
+          };
+        });
       });
-  };
+  }
+
+  private parseDate(dateStr: string): Date | null {
+    const date = new Date(dateStr);
+    return isNaN(date.getTime()) ? null : date;
+  }
 
   private createResource(): void {
     this.meetingService.create(this.meetingData)
@@ -92,7 +103,7 @@ export class MeetingManagementComponent implements OnInit {
       });
   };
 
-  // UI Event Handlers
+  // Manejadores de eventos UI
   onEditItem(element: Meeting) {
     this.isEditMode = true;
     this.meetingData = element;
@@ -125,11 +136,10 @@ export class MeetingManagementComponent implements OnInit {
     window.open(url, '_blank');
   }
 
+  // Método para abrir la sección de grabaciones
   openRecordings(): void {
-    const baseUrl = window.location.origin;  // Obtiene la URL base
-    window.open(`${baseUrl}/recording`, '_blank');  // Usa la URL completa
+    this.router.navigate(['/recording']); // Redirecciona a la ruta de Timeline
   }
-
 
   // Lifecycle Hooks
   ngOnInit(): void {

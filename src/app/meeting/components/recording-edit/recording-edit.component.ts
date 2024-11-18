@@ -83,9 +83,9 @@ validateTime(event: Event) {
 
 
 formatDate(): void {
-    const dateParts = this.meeting.date.split('/');
+    const dateParts = this.meeting.dateStr.split('/');
     if (dateParts.length === 3) {
-      this.meeting.date = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+      this.meeting.dateStr = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
     }
   }
 
@@ -102,8 +102,8 @@ formatDate(): void {
   private addRecording(meeting: Meeting): void {
     const recording = {
       title: meeting.title,
-      date: meeting.date,
-      time: meeting.time,
+      dateStr: meeting.dateStr,
+      timeStr: meeting.timeStr,
       link: meeting.link,
       recordingLink: meeting.recording.recordingLink,
               duration: meeting.recording.duration,

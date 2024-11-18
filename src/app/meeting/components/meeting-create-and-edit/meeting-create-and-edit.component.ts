@@ -1,7 +1,7 @@
 
 
 
-
+import { v4 as uuidv4 } from 'uuid';
 import { Component, EventEmitter, inject, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -65,58 +65,78 @@ export class MeetingCreateAndEditComponent implements OnInit {
 
   onTimeChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    const timeValue = input.value;
+    const timeValue = input.value; // Obtiene el valor de la hora
 
-    const timePattern = /^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/;
+    // Validar el formato de la hora (ejemplo: "13:00")
+    const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
     if (timePattern.test(timeValue)) {
+      // La hora es válida, puedes procesar el valor
       console.log('Hora válida:', timeValue);
     } else {
-      console.error('Hora no válida. Usa el formato hh:mm AM/PM');
+      // La hora no es válida, puedes mostrar un mensaje de error
+      console.error('Hora no válida. Usa el formato HH:mm');
     }
   }
 
   validateTime(event: Event) {
     const input = event.target as HTMLInputElement;
-    const timeValue = input.value;
+    const timeValue = input.value; // Obtiene el valor de la hora
 
-    const timePattern = /^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/;
+    // Validar el formato de la hora (ejemplo: "13:00")
+    const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
     if (!timePattern.test(timeValue) && timeValue !== '') {
+      // Si la hora no es válida y el campo no está vacío, limpia el campo
       input.value = '';
-      alert('Por favor, ingresa una hora válida en el formato hh:mm AM/PM.');
+      alert('Por favor, ingresa una hora válida en el formato HH:mm.');
     }
   }
 
   formatDate(): void {
-    const dateParts = this.meeting.date.split('/');
-    if (dateParts.length === 3) {
-      this.meeting.date = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+    const dateStr = this.meeting.dateStr as any;
+
+    if (dateStr instanceof Date && !isNaN(dateStr.getTime())) {
+      this.meeting.dateStr = dateStr.toISOString().split('T')[0];
+    } else if (typeof dateStr === 'string' && dateStr.trim() !== '') {
+      const dateParts = dateStr.split('/');
+      if (dateParts.length === 3) {
+        this.meeting.dateStr = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+      }
     }
   }
+
+
 
   // CRUD Actions
-  private createResource(): void {
-    this.meeting.members = this.members.map(m => m.id);
-    this.meeting.access_code = this.generateAccessCode();
+private createResource(): void {
+  const dateStr = new Date(this.meeting.dateStr);
+  const formattedDate = dateStr.toISOString().split('T')[0]; // "YYYY-MM-DD"
+  const formattedTime = this.meeting.timeStr; // Asumiendo que ya está en formato "HH:MM"
 
-    const randomHost = this.selectRandomHost();
-    if (randomHost) {
-      console.log('Host seleccionado:', randomHost);
-      this.meeting.host = randomHost.id;
-    }
-    this.meeting.link = this.generateRandomLink();
+  this.meeting.dateStr = formattedDate;
+  this.meeting.timeStr = formattedTime;
 
-    this.meeting.recording = {
-      recordingLink: this.generateRecordingLink(),
-      duration: this.generateRandomDuration(),
-      publicAccess: this.generateRandomAccess()
-    };
+  this.meeting.members = this.members.map(m => m.id);
+  this.meeting.accessCode = uuidv4(); // Genera UUID para el código de acceso
 
-    this.meetingService.create(this.meeting).subscribe(response => {
-      this.meeting = response;
-      this.addRecording(this.meeting);
-    });
+  const randomHost = this.selectRandomHost();
+  if (randomHost) {
+    console.log('Host seleccionado:', randomHost);
+    this.meeting.host = randomHost.id;
   }
+  this.meeting.link = this.generateRandomLink();
+
+  this.meeting.recording = {
+    recordingLink: this.generateRecordingLink(),
+    duration: this.generateRandomDuration(),
+    publicAccess: this.generateRandomAccess()
+  };
+
+  this.meetingService.create(this.meeting).subscribe(response => {
+    this.meeting = response; // Asegúrate de asignar la respuesta completa, incluyendo el código de acceso
+    this.addRecording(this.meeting);
+  });
+}
 
   private updateResource(): void {
     let resourceToUpdate: Meeting = this.meeting;
@@ -129,8 +149,8 @@ export class MeetingCreateAndEditComponent implements OnInit {
   private addRecording(meeting: Meeting): void {
     const recording = {
       title: meeting.title,
-      date: meeting.date,
-      time: meeting.time,
+      dateStr: meeting.dateStr,
+      timeStr: meeting.timeStr,
       link: meeting.link,
       recordingLink: meeting.recording.recordingLink,
       duration: this.generateRandomDuration(),

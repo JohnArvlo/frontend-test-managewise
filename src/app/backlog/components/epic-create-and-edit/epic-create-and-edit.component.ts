@@ -25,7 +25,7 @@ export class EpicCreateAndEditComponent {
     private dialogRef: MatDialogRef<EpicCreateAndEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Epic
   ) {
-    this.newEpic = data ? { ...data } : new Epic(0, '', '', 'to_do');
+    this.newEpic = data ? { ...data } : new Epic(0, '', '', 'TO_DO');
   }
 
   onSubmit(): void {

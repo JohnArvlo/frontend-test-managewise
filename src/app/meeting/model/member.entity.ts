@@ -1,69 +1,25 @@
 export class Member {
   id: number;
   profile: {
-    firstName: string;
-    lastName: string;
-    address: string;
-    number: string;
-    city: string;
-    postalCode: string;
+    fullName: string;
     email: string;
-    country: string;
-    phone: string;
-    avatar: string;
+    streetAddress: string;
   };
-  role: {
-    name: string;
-    description: string;
-  };
-  availability: {
-    startSchedule: string;
-    finalSchedule: string;
-    days: string[];
-  };
-  status: string;
+  role: string;
 
   constructor(
     id: number,
-    firstName: string,
-    lastName: string,
-    address: string,
-    number: string,
-    city: string,
-    postalCode: string,
+    fullName: string,
     email: string,
-    country: string,
-    phone: string,
-    avatar: string,
-    roleName: string,
-    roleDescription: string,
-    startSchedule: string,
-    finalSchedule: string,
-    days: string[],
-    status: string
+    streetAddress: string,
+    role: string
   ) {
     this.id = id;
     this.profile = {
-      firstName,
-      lastName,
-      address,
-      number,
-      city,
-      postalCode,
+      fullName,
       email,
-      country,
-      phone,
-      avatar,
+      streetAddress,
     };
-    this.role = {
-      name: roleName,
-      description: roleDescription,
-    };
-    this.availability = {
-      startSchedule,
-      finalSchedule,
-      days,
-    };
-    this.status = status;
+    this.role = role;
   }
 }

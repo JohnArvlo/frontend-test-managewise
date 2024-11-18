@@ -1,16 +1,16 @@
 export class Sprint {
   id: number;
   title: string;
-  goal: number;
-  status: 'Active' | 'Closed';
+  goal: string;
+  status: 'STARTED' | 'FINISHED';
   startDate: Date;
   endDate: Date;
 
   constructor(
     id: number,
     title: string,
-    goal: number,
-    status: 'Active' | 'Closed' = 'Active',
+    goal: string,
+    status: 'STARTED' | 'FINISHED' = 'STARTED',
     startDate: Date,
     endDate: Date
   ) {

@@ -37,13 +37,13 @@ export class MeetingInfoComponent implements OnInit {
   getMemberNames(): string[] { // Cambiar a getMemberNames
     return this.meeting.members.map((id: number) => { // Cambiar a members
       const member = this.members.find(m => m.id === id); // Cambiar a member
-      return member ? `${member.profile.firstName} ${member.profile.lastName}` : 'Unknown'; // Cambiar a profile
+      return member ? `${member.profile.fullName} ` : 'Unknown'; // Cambiar a profile
     });
   }
 
   getMemberName(id: number): string { // Cambiar a getMemberName
     const member = this.members.find(m => m.id === id); // Cambiar a member
-    return member ? `${member.profile.firstName} ${member.profile.lastName}` : 'Unknown'; // Cambiar a profile
+    return member ? `${member.profile.fullName} ` : 'Unknown'; // Cambiar a profile
   }
 
   onClose(): void {

@@ -12,7 +12,7 @@
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{ element.title }}</mat-card-title>
-        <mat-card-subtitle>{{ element.date | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ element.dateStr | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
 
         <!-- Edit Button on the top right -->
         <button mat-icon-button color="primary" (click)="onEditItem(element)" class="edit-button">
@@ -22,8 +22,8 @@
 
       <mat-card-content>
         <p><strong>ID:</strong> {{ element.id }}</p>
-        <p><strong>Fecha:</strong> {{ element.date | date: 'dd/MM/yyyy' }}</p>
-        <p><strong>Hora:</strong> {{ element.time }}</p>
+        <p><strong>Fecha:</strong> {{ element.dateStr | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Hora:</strong> {{ element.timeStr }}</p>
         <p><strong>Enlace:</strong>
           <button mat-raised-button class="open-link-button" (click)="openLink(element.link)">
             Abrir Link

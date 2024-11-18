@@ -31,13 +31,10 @@ export class UserStoryCreateAndEditComponent {
     this.newUserStory = data ? { ...data } : new UserStory();
   }
 
-  // Metodo para manejar la creación o actualización del issue
   onSubmit(): void {
-    // Si es un nuevo issue, añadimos automáticamente la fecha, hora y dos eventos al historial
     if (!this.newUserStory.id) {
       const currentDateTime = new Date().toISOString(); // Obtener fecha y hora actuales
     }
-    // Guardamos o actualizamos el issue en la base de datos
     if (this.newUserStory.id) {
       this.userStoriesService.update(this.newUserStory.id, this.newUserStory).subscribe(() => {
         this.dialogRef.close(true);

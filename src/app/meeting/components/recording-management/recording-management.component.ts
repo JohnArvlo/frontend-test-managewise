@@ -79,7 +79,7 @@ export class RecordingManagementComponent implements OnInit {
 
     if (this.startDate && this.endDate) {
       this.filteredMeetings = this.filteredMeetings.filter(meetingItem => {
-        const meetingDate = new Date(meetingItem.date);
+        const meetingDate = new Date(meetingItem.dateStr);
         return meetingDate >= this.startDate! && meetingDate <= this.endDate!;
       });
     }

@@ -1,4 +1,4 @@
-#product-backlog-card, #sprint-backlog-card{
+#product-backlog-card, #sprint-backlog-card, #sprint-card{
   background-color: lightgray;
   padding: 1rem;
   max-width: 90%;
@@ -22,9 +22,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.start-sprint{
+.sprint-backlog-form{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: auto;
+}
+
+.sprint-button{
   border-radius: 8px;
   background-color: black;
   border: none;
@@ -32,7 +43,7 @@
   height: 2rem;
   width: 6rem;
 }
-.start-sprint:hover{
+.sprint-button:hover{
   background-color: #212121;
   cursor: pointer;
 }

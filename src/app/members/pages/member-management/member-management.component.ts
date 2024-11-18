@@ -4,6 +4,8 @@ import { Member } from "../../model/member.entity";
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from "@angular/forms";
+import { Router } from '@angular/router';
+
 import { NgFor } from "@angular/common";
 import { MemberCreateAndEditComponent } from "../../components/member-create-and-edit/member-create-and-edit.component";
 

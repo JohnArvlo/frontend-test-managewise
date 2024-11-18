@@ -1,5 +1,5 @@
 <div class="form-list">
-  <h6 class="form-title">{{ newTask.id ? 'Editar Tarea' : 'Agregar nueva Tarea' }}</h6>
+  <h6 class="form-title">{{ newTask.taskId ? 'Editar Tarea' : 'Agregar nueva Tarea' }}</h6>
   <form (ngSubmit)="onSubmit()" class="task-form">
     <mat-form-field>
       <mat-label>Título</mat-label>
@@ -14,9 +14,9 @@
     <mat-form-field>
       <mat-label>Status</mat-label>
       <mat-select [(ngModel)]="newTask.status" name="status" required>
-        <mat-option value="to_do">To Do</mat-option>
-        <mat-option value="in_progress">Doing</mat-option>
-        <mat-option value="done">Done</mat-option>
+        <mat-option value="TO_DO">To Do</mat-option>
+        <mat-option value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option value="DONE">Done</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -25,14 +25,9 @@
       <input matInput type="number" [(ngModel)]="newTask.estimation" name="effort" required/>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>User Story Id</mat-label>
-      <input matInput type="number" [(ngModel)]="newTask.userStoryId" name="userStoryId" required/>
-    </mat-form-field>
-
     <mat-card-actions>
       <button class="action-button-cancel" mat-raised-button color="warn" (click)="onCancel()" type="button">Cancelar</button>
-      <button class="action-button-accept" mat-raised-button color="primary" type="submit">{{ newTask.id ? 'Guardar' : 'Agregar' }}</button>
+      <button class="action-button-accept" mat-raised-button color="primary" type="submit">{{ newTask.taskId ? 'Guardar' : 'Agregar' }}</button>
     </mat-card-actions>
   </form>
 </div>

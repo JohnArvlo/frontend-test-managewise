@@ -11,7 +11,7 @@
 
     <mat-form-field>
       <mat-label>Fecha</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" name="DATE" required [(ngModel)]="meeting.date" [ngModelOptions]="{standalone: true}" (dateChange)="formatDate()" >
+      <input matInput [matDatepicker]="picker" placeholder="YYYY-MM-DD" name="DATE" required [(ngModel)]="meeting.dateStr" [ngModelOptions]="{standalone: true}" (dateChange)="formatDate()">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -23,16 +23,16 @@
         type="text"
         name="TIME"
         required
-        [(ngModel)]="meeting.time"
-        placeholder="hh:mm AM/PM"
+        [(ngModel)]="meeting.timeStr"
+        placeholder="HH:mm"
         (input)="validateTime($event)"
-        pattern="^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$"
-        title="Formato: hh:mm AM/PM"
+        pattern="^([01]\d|2[0-3]):([0-5]\d)$"
+        title="Formato: HH:mm"
       >
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="link" name="link" required [(ngModel)]="meeting.link" [disabled]="!editMode">
+      <input matInput placeholder="Link" name="link" required [(ngModel)]="meeting.link">
     </mat-form-field>
 
     <mat-form-field>
