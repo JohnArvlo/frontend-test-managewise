@@ -12,7 +12,12 @@ export class IssuesService extends BaseService<Issue> {
     super(httpClient);
     this.resourceEndpoint = '/issues';
   }
-
+  protected httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`, // Incluye el token si existe
+    }),
+  };
   // Nuevo método específico para IssuesService
   getAllIssues(): Observable<Issue[]> {
     return this.httpClient.get<Issue[]>(`${this.basePath}${this.resourceEndpoint}`, this.httpOptions);
