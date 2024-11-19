@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: 'backlog-items', component: BacklogItemsPageComponent, canActivate: [authenticationGuard] },
   { path: 'members', component: MemberManagementComponent ,canActivate: [authenticationGuard]},
   { path: 'meeting', component: MeetingManagementComponent, canActivate: [authenticationGuard] },
-  { path: 'issues', component: IssuesListComponent,canActivate: [authenticationGuard] },
+  { path: 'issues', component: IssuesListComponent },
 
   { path: 'recording', component: RecordingManagementComponent},
   { path: '', component: PageNotFoundComponent },
