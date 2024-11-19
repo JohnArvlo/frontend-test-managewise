@@ -13,8 +13,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthenticationSectionComponent } from './iam/components/authentication-section/authentication-section.component';
 import { AuthenticationService } from './iam/services/authentication.service';
-
-
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Router } from '@angular/router';
 
@@ -31,7 +30,8 @@ import { Router } from '@angular/router';
     MatSidenavModule,
     LanguageSwitcherComponent,
     CommonModule,
-    AuthenticationSectionComponent
+    AuthenticationSectionComponent,
+    TranslateModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -48,11 +48,9 @@ export class AppComponent implements OnInit {
   otherOptions = [
     { icon: 'https://cdn-icons-png.flaticon.com/512/87/87578.png', path: '/statistics', title: 'Statistics' },
     { icon: 'https://i.imgur.com/X51XVUz.png', path: '/backlog', title: 'Backlog' },
-    { icon: 'https://i.imgur.com/kP7elFc.png', path: '/board', title: 'Board' },
-    { icon: 'https://i.imgur.com/xQxGLrm.png', path: '/issues', title: 'Reports' },
+    { icon: 'https://i.imgur.com/xQxGLrm.png', path: '/issues', title: 'Issues' },
     { icon: 'https://i.imgur.com/XkRHbGU.png', path: '/members', title: 'Members' },
     { icon: 'https://i.imgur.com/n1IHpmx.png', path: '/meeting', title: 'Meeting' },
-    { icon: 'https://i.imgur.com/GWdot6x.png', path: '/settings', title: 'Configuración' },
   ];
 
   constructor(
