@@ -20,7 +20,12 @@ export class IssuesService extends BaseService<Issue> {
   // Crear las opciones de cabecera con el token
   private createHttpOptions() {
     const token = localStorage.getItem('token'); // Obtener el token del localStorage
-    console.log('Token en las cabeceras:', token);  // Debug para verificar que el token se envía
+
+    if (!token) {
+      console.warn('No se encontró el token en localStorage');
+    } else {
+      console.log('Token encontrado:', token);  // Verificación de token
+    }
 
     return {
       headers: new HttpHeaders({
@@ -79,7 +84,6 @@ export class IssuesService extends BaseService<Issue> {
     console.error('Ocurrió un error:', error);
 
     if (error.status === 401) {
-      // Si el token es inválido o ha expirado, redirigir al login
       console.log('Token expirado o no válido. Redirigiendo al login...');
       localStorage.removeItem('token');  // Eliminar token expirado
       this.router.navigate(['/login']);  // Redirigir al login
