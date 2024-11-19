@@ -5,3 +5,4 @@ export const environment = {production: false,
                             // Server Base Path for Spring Boot REST API
                             serverBasePath: 'https://managewise-ffbua6fpfmbteaeq.brazilsouth-01.azurewebsites.net/api/v1'
                             };
+  
