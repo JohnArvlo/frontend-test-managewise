@@ -13,7 +13,7 @@ import { SignUpResponse } from "../model/sign-up.response";
 })
 export class AuthenticationService {
 
-  basePath: string = `${environment.serverBasePath}`; // Usar comillas invertidas para interpolar la URL base
+  basePath: string = `${environment.serverBasePath}`;
   httpOptions = { headers: new HttpHeaders({'Content-type': 'application/json'}) };
 
   private signedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -43,11 +43,11 @@ export class AuthenticationService {
     return this.http.post<SignUpResponse>(`${this.basePath}/authentication/sign-up`, signUpRequest, this.httpOptions)
       .subscribe({
         next: (response) => {
-          console.log(`Signed up as ${response.username} with id: ${response.id}`);  // Corregido con comillas invertidas
+          console.log(`Signed up as ${response.username} with id: ${response.id}`);
           this.router.navigate(['/sign-in']).catch((error) => console.error('Navigation error:', error));
         },
         error: (error) => {
-          console.error(`Error while signing up: ${error}`);  // Corregido con comillas invertidas
+          console.error(`Error while signing up: ${error}`);
           this.router.navigate(['/sign-up']).catch((error) => console.error('Navigation error:', error));
         }
       });
@@ -67,14 +67,14 @@ export class AuthenticationService {
           this.signedInUserId.next(response.id);
           this.signedInUsername.next(response.username);
           localStorage.setItem('token', response.token);
-          console.log(`Signed in as ${response.username} with token ${response.token}`); // Corregido con comillas invertidas
+          console.log(`Signed in as ${response.username} with token ${response.token}`);
           this.router.navigate(['/']).catch((error) => console.error('Navigation error:', error));
         },
         error: (error) => {
           this.signedIn.next(false);
           this.signedInUserId.next(0);
           this.signedInUsername.next('');
-          console.error(`Error while signing in: ${error}`);  // Corregido con comillas invertidas
+          console.error(`Error while signing in: ${error}`);
           this.router.navigate(['/sign-in']).catch((error) => console.error('Navigation error:', error));
         }
       });
