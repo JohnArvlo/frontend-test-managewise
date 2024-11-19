@@ -24,3 +24,9 @@ mat-card-actions {
   justify-content: space-between; /* Espacio entre botones */
   margin-top: 20px; /* Espaciado superior para los botones */
 }
+.scrollable-container {
+  max-height: 80vh; /* Ajusta según sea necesario */
+  overflow-y: auto;
+  padding: 16px;
+  box-sizing: border-box;
+}

@@ -9,7 +9,7 @@
 <div *ngIf='backogItem=="userStories"'>
 
   <div class="item-header">
-    <h6>User Stories</h6>
+    <h6>{{ 'userStories' | translate }}</h6>
     <button mat-raised-button class="item-create" (click)="openAddUserStoryForm()">Create</button>
   </div>
 
@@ -24,14 +24,14 @@
           <button (click)="onDeleteUserStory(userStory)" class="delete-button"><mat-icon>delete</mat-icon></button>
         </div>
       </div>
-      <span>Title: {{ userStory.title }}</span> <br>
-      <span>Description: {{ userStory.description }}</span> <br>
+      <span>{{ 'title' | translate }}: {{ userStory.title }}</span> <br>
+      <span>{{ 'description' | translate }}: {{ userStory.description }}</span> <br>
       <span *ngIf='userStory.status=="TO_DO"' style="color: red">Status: To Do</span>
       <span *ngIf='userStory.status=="IN_PROGRESS"' style="color: darkblue">Status: In Progress </span>
       <span *ngIf='userStory.status=="DONE"' style="color: green">Status: Done </span>
       <br>
-      <span>Effort: {{ userStory.effort }}</span><br>
-      <span>Epic: {{ userStory.epicId }}</span>
+      <span>{{ 'effort' | translate }}: {{ userStory.effort }}</span><br>
+      <span>{{ 'epic' | translate }} {{ userStory.epicId }}</span>
 
       <br>
 
@@ -60,8 +60,8 @@
 
 <div *ngIf='backogItem=="epics"'>
   <div class="item-header">
-    <h6>Epics</h6>
-    <button mat-raised-button (click)="openAddEpicForm()" class="item-create">Create</button>
+    <h6>{{ 'epics' | translate }}</h6>
+    <button mat-raised-button (click)="openAddEpicForm()" class="item-create">{{ 'create' | translate }}</button>
   </div>
 
   <div class="us-section">
@@ -74,8 +74,8 @@
             <button (click)="onDeleteEpic(epic)" class="delete-button"><mat-icon>delete</mat-icon></button>
           </div>
         </div>
-        <span>Title: {{ epic.title }}</span> <br>
-        <span>Description: {{ epic.description }}</span> <br>
+        <span>{{ 'title' | translate }}: {{ epic.title }}</span> <br>
+        <span>{{ 'description' | translate }}: {{ epic.description }}</span> <br>
         <!--<span *ngIf='epic.status=="TO_DO"' style="color: red">Status: To Do</span>
         <span *ngIf='epic.status=="IN_PROGRESS"' style="color: darkblue">Status: {{ epic.status }}</span>
         <span *ngIf='epic.status=="DONE"' style="color: green">Status: {{ epic.status }}</span>-->

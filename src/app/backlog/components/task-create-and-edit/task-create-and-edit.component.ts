@@ -11,10 +11,14 @@ import { Task } from "../../model/task.entity";
 import {UserStoriesService} from "../../services/user-stories.service";
 import {UserStory} from "../../model/user-story.entity";
 
+
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-task-create-and-edit',
   standalone: true,
-  imports: [MatCardModule, FormsModule, NgFor, MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [MatCardModule, FormsModule, NgFor, MatFormFieldModule, MatInputModule, MatSelectModule, TranslateModule],
   templateUrl: './task-create-and-edit.component.html',
   styleUrls: ['./task-create-and-edit.component.css']
 })

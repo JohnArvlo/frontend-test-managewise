@@ -11,10 +11,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {UserStoriesService} from "../../services/user-stories.service";
 import {UserStory} from "../../model/user-story.entity";
 
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-user-story-create-and-edit',
   standalone: true,
-  imports: [MatCardModule, FormsModule, NgFor,MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [MatCardModule, FormsModule, NgFor,MatFormFieldModule, MatInputModule, MatSelectModule, TranslateModule],
   templateUrl: './user-story-create-and-edit.component.html',
   styleUrl: './user-story-create-and-edit.component.css'
 })

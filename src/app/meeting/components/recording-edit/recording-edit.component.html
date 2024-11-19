@@ -17,10 +17,10 @@
 
     <!-- Selección de acceso público o privado -->
     <mat-form-field>
-      <mat-label>Acceso</mat-label>
+      <mat-label>{{ 'accessLabel' | translate }}</mat-label>
       <mat-select [(ngModel)]="meeting.recording.publicAccess" name="access">
-        <mat-option [value]="true">Público</mat-option>
-        <mat-option [value]="false">Privado</mat-option>
+        <mat-option [value]="true">{{ 'accessPublicOption' | translate }}</mat-option>
+        <mat-option [value]="false">{{ 'accessPrivateOption' | translate }}</mat-option>
       </mat-select>
     </mat-form-field>
   </mat-dialog-content>

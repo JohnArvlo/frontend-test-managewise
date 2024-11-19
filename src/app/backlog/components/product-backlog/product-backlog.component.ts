@@ -13,10 +13,13 @@ import { Sprint } from "../../model/sprint.entity";
 import { SprintService } from "../../services/sprints.service";
 import {FormsModule} from "@angular/forms";
 
+import { TranslateService } from '@ngx-translate/core';
+
+
 @Component({
   selector: 'app-product-backlog',
   standalone: true,
-  imports: [MatCardModule, MatInputModule, MatFormFieldModule, CommonModule, MatIcon, FormsModule],
+  imports: [MatCardModule, MatInputModule, MatFormFieldModule, CommonModule, MatIcon, FormsModule, TranslateModule],
   templateUrl: './product-backlog.component.html',
   styleUrl: './product-backlog.component.css'
 })

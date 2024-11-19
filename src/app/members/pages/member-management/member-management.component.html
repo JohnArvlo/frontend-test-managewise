@@ -1,20 +1,26 @@
 <div class="container">
-  <h2>Equipo del proyecto</h2>
-  <button mat-raised-button class="custom-button" (click)="openAddMemberDialog()">Agregar nuevo miembro al proyecto</button>
+  <h2>{{ 'projectTeamTitle' | translate }}</h2>
+  <button mat-raised-button class="custom-button" (click)="openAddMemberDialog()">
+    {{ 'addMemberButton' | translate }}
+  </button>
   <br><br><br>
   <div class="issue-list">
     <mat-card *ngFor="let member of members" class="issue-card">
       <mat-card-content>
         <mat-card-title>
-          <strong>Nombre: </strong> {{ member.personName.fullName || 'Sin nombre' }}
+          <strong>{{ 'nameLabel' | translate }}</strong> {{ member.fullName || 'Sin nombre' }}
         </mat-card-title>
-        <p><strong>Rol:</strong> {{ member.role || 'Sin rol' }}</p>
-        <p><strong>Correo Electrónico:</strong> {{ member.email.email || 'Sin correo electrónico' }}</p>
-        <p><strong>Dirección:</strong> {{ member.streetAddress.streetAddress || 'Address not available' }}</p>
+        <p><strong>{{ 'roleLabel' | translate }}</strong> {{ member.role || 'Sin rol' }}</p>
+        <p><strong>{{ 'emailLabel' | translate }}</strong> {{ member.email || 'Sin correo electrónico' }}</p>
+        <p><strong>{{ 'addressLabel' | translate }}</strong> {{ member.streetAddress || ('addressNotAvailable' | translate) }}</p>
       </mat-card-content>
       <mat-card-actions class="card-actions">
-        <button mat-raised-button color="accent" class="edit-button" (click)="openEditMemberDialog(member)">Editar</button>
-        <button mat-raised-button color="warn" class="delete-button" (click)="deleteMember(member)">Eliminar</button>
+        <button mat-raised-button color="accent" class="edit-button" (click)="openEditMemberDialog(member)">
+          {{ 'editButton' | translate }}
+        </button>
+        <button mat-raised-button color="warn" class="delete-button" (click)="deleteMember(member)">
+          {{ 'deleteButton' | translate }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

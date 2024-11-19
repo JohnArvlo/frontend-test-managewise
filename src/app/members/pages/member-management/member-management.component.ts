@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from "@angular/forms";
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { NgFor } from "@angular/common";
 import { MemberCreateAndEditComponent } from "../../components/member-create-and-edit/member-create-and-edit.component";
@@ -12,7 +13,7 @@ import { MemberCreateAndEditComponent } from "../../components/member-create-and
 @Component({
   selector: 'app-member-management',
   standalone: true,
-  imports: [MatCardModule, FormsModule, NgFor],
+  imports: [MatCardModule, FormsModule, NgFor, TranslateModule],
   templateUrl: './member-management.component.html',
   styleUrls: ['./member-management.component.css']
 })

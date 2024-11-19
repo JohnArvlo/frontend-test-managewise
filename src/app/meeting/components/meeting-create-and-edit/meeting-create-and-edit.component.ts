@@ -1,6 +1,3 @@
-
-
-
 import { v4 as uuidv4 } from 'uuid';
 import { Component, EventEmitter, inject, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
@@ -23,7 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MemberService } from '../../services/member.service'; // Servicio para obtener miembros
 
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-meeting-create-and-edit',
@@ -40,9 +37,6 @@ import { MemberService } from '../../services/member.service'; // Servicio para 
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
-
-
   ],
   templateUrl: './meeting-create-and-edit.component.html',
   styleUrls: ['./meeting-create-and-edit.component.css']
@@ -224,3 +218,4 @@ private createResource(): void {
     this.loadMembers(); // Cargar miembros al inicializar el componente
   }
 }
+

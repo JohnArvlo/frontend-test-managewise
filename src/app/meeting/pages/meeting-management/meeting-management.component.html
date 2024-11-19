@@ -3,7 +3,7 @@
   <h3>{{ 'MEETING' | translate }}</h3>
 
   <button mat-raised-button color="black" (click)="onAddItem()" class="create-meeting-button">
-    <mat-icon>add</mat-icon> {{ 'Crear Nueva Reunion' | translate }}
+    <mat-icon>add</mat-icon> {{ 'CREATE_NEW_MEETING' | translate }}
   </button>
 
   <!-- Cards Container -->
@@ -21,12 +21,12 @@
       </mat-card-header>
 
       <mat-card-content>
-        <p><strong>ID:</strong> {{ element.id }}</p>
-        <p><strong>Fecha:</strong> {{ element.dateStr | date: 'dd/MM/yyyy' }}</p>
-        <p><strong>Hora:</strong> {{ element.timeStr }}</p>
-        <p><strong>Enlace:</strong>
+        <p><strong>{{ 'ID' | translate }}:</strong> {{ element.id }}</p>
+        <p><strong>{{ 'DATE' | translate }}:</strong> {{ element.dateStr | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>{{ 'TIME' | translate }}:</strong> {{ element.timeStr }}</p>
+        <p><strong>{{ 'LINK' | translate }}:</strong>
           <button mat-raised-button class="open-link-button" (click)="openLink(element.link)">
-            Abrir Link
+            {{ 'OPEN_LINK' | translate }}
           </button>
         </p>
       </mat-card-content>
@@ -50,12 +50,8 @@
     </mat-card>
   </div>
 
-  <h4>RECORDING</h4>
-  <!-- Botón para abrir grabaciones -->
-  <button mat-raised-button color="primary" (click)="openRecordings()">Ver Grabaciones</button>
-
-  <!-- Resto del código HTML -->
-
-  <!-- Dropdown para seleccionar tipo de grabación -->
+  <h4>{{ 'RECORDING' | translate }}</h4>
+  <!-- Contenedor de grabaciones -->
+  <app-recording-management></app-recording-management>
 </div>
 

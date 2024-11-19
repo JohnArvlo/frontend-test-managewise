@@ -8,13 +8,13 @@ import { BaseService } from '../../meeting/services/base.service'; // Si necesit
   providedIn: 'root'
 })
 export class MemberService {
-  private apiUrl = 'http://localhost:8091/api/v1/members';
+  private apiUrl = 'https://managewise-ffbua6fpfmbteaeq.brazilsouth-01.azurewebsites.net/api/v1/members';
 
   constructor(private http: HttpClient) { }
 
   // Obtener todos los miembros
   getAll(): Observable<Member[]> {
-    return this.http.get<Member[]>('http://localhost:8091/api/v1/members');
+    return this.http.get<Member[]>('https://managewise-ffbua6fpfmbteaeq.brazilsouth-01.azurewebsites.net/api/v1/members');
   }
 
   // Actualizar miembros en bloque (recuerda que My JSON Server no soporta esta funcionalidad)

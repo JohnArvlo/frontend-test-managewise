@@ -12,11 +12,13 @@ import { History } from '../../model/history.entity'; // Modelo de datos para ev
 import { MatSelectModule } from '@angular/material/select'; // Módulo de selectores de Angular Material
 import { MatInputModule } from '@angular/material/input'; // Módulo de inputs de Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field'; // Módulo para campos de formularios de Angular Material
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-issues-list', // Selector del componente
   standalone: true, // Indica que es un componente autónomo (standalone)
-  imports: [MatCardModule, FormsModule, NgFor, MatFormFieldModule, MatInputModule, MatSelectModule], // Módulos importados que el componente usará
+  imports: [MatCardModule, FormsModule, NgFor, MatFormFieldModule, MatInputModule, MatSelectModule,TranslateModule], // Módulos importados que el componente usará
   templateUrl: './issues-list.component.html', // Ruta de la plantilla HTML del componente
   styleUrls: ['./issues-list.component.css'] // Ruta de la hoja de estilos del componente
 })

@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RecordingEditComponent } from '../../components/recording-edit/recording-edit.component';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recording-management',

@@ -24,10 +24,13 @@ import { TaskCreateAndEditComponent } from "../task-create-and-edit/task-create-
 import { EpicCreateAndEditComponent } from "../epic-create-and-edit/epic-create-and-edit.component";
 import {Sprint} from "../../model/sprint.entity"; // Importa el componente para épicos
 
+import { TranslateService } from '@ngx-translate/core';
+
+
 @Component({
   selector: 'app-backlog-items-management',
   standalone: true,
-  imports: [MatCardModule, MatInputModule, MatFormFieldModule, CommonModule, FormsModule, MatIcon, NgFor],
+  imports: [MatCardModule, MatInputModule, MatFormFieldModule, CommonModule, FormsModule, MatIcon, NgFor, TranslateModule],
   templateUrl: './backlog-items-management.component.html',
   styleUrl: './backlog-items-management.component.css'
 })

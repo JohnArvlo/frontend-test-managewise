@@ -7,6 +7,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Meeting } from '../../model/meeting.entity';
 import { MeetingService } from '../../services/meeting.service'; // Asegúrate de ajustar la ruta según tu estructura
 import { MemberService } from '../../services/member.service'; // Servicio para obtener miembros
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface EditMemberDialogData { // Cambiado a EditMemberDialogData
   members: Member[]; // Lista de miembros de la reunión
@@ -21,7 +23,8 @@ interface EditMemberDialogData { // Cambiado a EditMemberDialogData
   imports: [
     CommonModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   templateUrl: './edit-participant-dialog.component.html', // Cambia esto
   styleUrls: ['./edit-participant-dialog.component.css']

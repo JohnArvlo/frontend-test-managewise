@@ -9,10 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Epic } from "../../model/epic.entity";
 import {EpicsService} from "../../services/epics.service";
 
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-epic-create-and-edit',
   standalone: true,
-  imports: [MatCardModule, FormsModule, NgFor, MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [MatCardModule, FormsModule, NgFor, MatFormFieldModule, MatInputModule, MatSelectModule, TranslateModule],
   templateUrl: './epic-create-and-edit.component.html',
   styleUrls: ['./epic-create-and-edit.component.css']
 })

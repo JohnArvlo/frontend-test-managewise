@@ -12,35 +12,31 @@ export class MembersService {
 
   constructor(private http: HttpClient) {}
 
-  private getAuthHeaders() {
-    const token = localStorage.getItem('token');
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': token ? `Bearer ${token}` : ''  // Si no hay token, no se incluye
+      'Authorization': token ? `Bearer ${token}` : '',  // Si no hay token, no se incluye
     });
   }
 
-  // Método para obtener todos los miembros
+  // Obtener todos los miembros
   getAllMembers(): Observable<Member[]> {
-    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
-    return this.http.get<Member[]>(this.apiUrl, { headers });
+    return this.http.get<Member[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 
   // Crear un miembro
   create(member: Member): Observable<Member> {
-    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
-    return this.http.post<Member>(this.apiUrl, member, { headers });
+    return this.http.post<Member>(this.apiUrl, member, { headers: this.getAuthHeaders() });
   }
 
-  // Método para actualizar un miembro
+  // Actualizar un miembro
   update(id: number, member: Member): Observable<Member> {
-    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
-    return this.http.put<Member>(`${this.apiUrl}/${id}`, member, { headers });
+    return this.http.put<Member>(`${this.apiUrl}/${id}`, member, { headers: this.getAuthHeaders() });
   }
 
-  // Método para eliminar un miembro
+  // Eliminar un miembro
   delete(id: number): Observable<void> {
-    const headers = this.getAuthHeaders();  // Obtiene los encabezados con el token
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 }

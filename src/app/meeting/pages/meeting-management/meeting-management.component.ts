@@ -12,9 +12,9 @@ import { MeetingService } from '../../services/meeting.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { MeetingInfoComponent } from '../../components/meeting-info/meeting-info.component';
-import { Router } from '@angular/router';  // Asegúrate de importar Router
-
+import { RecordingManagementComponent } from '../../components/recording-management/recording-management.component';
 import { MemberService } from '../../services/member.service'; // Cambiado a MemberService
+
 
 @Component({
   selector: 'app-meeting-management',
@@ -28,20 +28,19 @@ import { MemberService } from '../../services/member.service'; // Cambiado a Mem
     MeetingCreateAndEditComponent,
     MeetingInfoComponent,
     NgClass,
-    TranslateModule
+    TranslateModule,RecordingManagementComponent
   ],
   templateUrl: './meeting-management.component.html',
   styleUrls: ['./meeting-management.component.css']
 })
 export class MeetingManagementComponent implements OnInit {
-  // Atributos
+  // Attributes
   meetingData: Meeting;
   meeting!: Array<Meeting>;
   isEditMode: boolean;
 
   private meetingService: MeetingService = inject(MeetingService);
   private matDialog: MatDialog = inject(MatDialog);
-  private router: Router = inject(Router);  // Inyección del Router
 
   // Constructor
   constructor() {
@@ -50,13 +49,13 @@ export class MeetingManagementComponent implements OnInit {
     this.meeting = [];
   }
 
-  // Métodos privados
+  // Private Methods
   private resetEditState(): void {
     this.isEditMode = false;
     this.meetingData = {} as Meeting;
   }
 
-  // Acciones CRUD
+  // CRUD Actions
   private getAllResources(): void {
     this.meetingService.getAll()
       .subscribe((response: any) => {
@@ -103,7 +102,7 @@ export class MeetingManagementComponent implements OnInit {
       });
   };
 
-  // Manejadores de eventos UI
+  // UI Event Handlers
   onEditItem(element: Meeting) {
     this.isEditMode = true;
     this.meetingData = element;
@@ -134,11 +133,6 @@ export class MeetingManagementComponent implements OnInit {
   // Método para abrir un enlace
   openLink(url: string): void {
     window.open(url, '_blank');
-  }
-
-  // Método para abrir la sección de grabaciones
-  openRecordings(): void {
-    this.router.navigate(['/recording']); // Redirecciona a la ruta de Timeline
   }
 
   // Lifecycle Hooks

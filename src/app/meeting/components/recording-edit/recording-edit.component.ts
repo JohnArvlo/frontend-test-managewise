@@ -17,7 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'; // Necesario para el datepicker
 import { NgxMaterialTimepickerComponent } from 'ngx-material-timepicker'; // Asegúrate de importar el componente correcto
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-recording-edit',
   standalone: true,

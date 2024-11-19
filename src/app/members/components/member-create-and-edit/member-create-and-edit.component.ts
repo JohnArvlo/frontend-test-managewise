@@ -3,7 +3,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MembersService } from '../../services/members.service';
 import { Member } from '../../model/member.entity';
-import { PersonName } from '../../model/person-name.entity'; // Asegúrate de importar PersonName correctamente
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,19 +39,6 @@ export class MemberCreateAndEditComponent implements OnInit {
       this.newMember = { ...this.data };
     }
 
-    // Asegúrate de que 'personName' sea una instancia de la clase PersonName
-    if (!this.newMember.personName) {
-      this.newMember.personName = new PersonName(''); // Inicializar como una instancia de PersonName
-    }
-    if (!this.newMember.email) {
-      this.newMember.email = { email: '' }; // Inicializar 'email' si es necesario
-    }
-    if (!this.newMember.streetAddress) {
-      this.newMember.streetAddress = { streetAddress: '' }; // Inicializar 'address' si es necesario
-    }
-    if (!this.newMember.role) {
-      this.newMember.role = ''; // Inicializar 'role' si es necesario
-    }
   }
 
   // Método para enviar los datos (crear o editar)

@@ -1,23 +1,25 @@
-<h3>Reporte de Incidencia</h3>
+<div class="scrollable-container">
+<h3>{{ 'incidentReport' | translate }}</h3>
 <mat-card class="issue-card">
   <mat-card-title class="issue-title">{{ issue.title }}</mat-card-title>
-  <mat-card-content class="issue-content scrollable-content">
-    <p class="issue-description"><strong>Descripción:</strong> {{ issue.description }}</p>
-    <p class="issue-status"><strong>Estado:</strong> {{ issue.status }}</p>
-    <p class="issue-priority"><strong>Prioridad:</strong> {{ issue.priority }}</p>
-    <p class="issue-assigned"><strong>Asignado a:</strong> {{ issue.assignedTo }}</p>
-    <p class="issue-sprint"><strong>Sprint Asociado:</strong> {{ issue.sprintAssociate }}</p>
-    <p class="issue-created"><strong>Fecha de Creación:</strong> {{ issue.createdIn }}</p>
-    <p class="issue-resolution"><strong>Fecha de Resolución:</strong> {{ issue.resolutionDate || 'Pendiente' }}</p>
+    <p class="issue-createdBy"><strong>{{ 'createdBy' | translate }}:</strong> {{ issue.madeBy }}</p>
+    <p class="issue-description"><strong>{{ 'description' | translate }}:</strong> {{ issue.description }}</p>
+    <p class="issue-status"><strong>{{ 'statusissue' | translate }}:</strong> {{ issue.status }}</p>
+    <p class="issue-priority"><strong>{{ 'priorityissue' | translate }}:</strong> {{ issue.priority }}</p>
+    <p class="issue-assigned"><strong>{{ 'assignedTo' | translate }}:</strong> {{ issue.assignedTo }}</p>
+    <p class="issue-sprint"><strong>{{ 'associatedSprint' | translate }}:</strong> {{ issue.sprintAssociate }}</p>
+    <p class="issue-created"><strong>{{ 'createdIn' | translate }}:</strong> {{ issue.createdIn }}</p>
+    <p class="issue-resolution"><strong>{{ 'resolutionDate' | translate }}:</strong> {{ issue.resolutionDate || 'Pendiente' }}</p>
 
-    <h5 class="issue-history-title">Historial de Cambios</h5>
+    <h5 class="issue-history-title">{{ 'changeHistory' | translate }}</h5>
     <ul class="issue-history-list">
       <li *ngFor="let historyItem of issue.history" class="history-item">
-        <p class="history-date"><strong>Fecha:</strong> {{ historyItem.createdDate }}</p>
-        <p class="history-user"><strong>Usuario:</strong> {{ historyItem.madeBy }}</p>
-        <p class="history-event"><strong>Evento:</strong> {{ historyItem.eventName }}</p>
-        <p class="history-description"><strong>Descripción:</strong> {{ historyItem.description }}</p>
+        <p class="history-date"><strong>{{ 'date' | translate }}:</strong> {{ historyItem.createdDate }}</p>
+        <p class="history-user"><strong>{{ 'user' | translate }}:</strong> {{ historyItem.madeBy }}</p>
+        <p class="history-event"><strong>{{ 'event' | translate }}:</strong> {{ historyItem.eventName }}</p>
+        <p class="history-description"><strong>{{ 'description' | translate }}:</strong> {{ historyItem.description }}</p>
       </li>
     </ul>
-  </mat-card-content>
+  <button mat-raised-button color="primary" (click)="onClose()" type="button">{{ 'close' | translate }}</button>
 </mat-card>
+</div>

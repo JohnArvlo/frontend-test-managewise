@@ -6,13 +6,14 @@ import { Meeting } from '../../model/meeting.entity';
 import { Member } from '../../model/member.entity'; // Cambiar a Member
 import { MemberService } from '../../services/member.service'; // Cambiar a MemberService
 import { EditMemberDialogComponent } from '../participants/edit-participant-dialog.component';
-
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-meeting-info',
   standalone: true,
   imports: [
     CommonModule,
-    MatDialogModule
+    MatDialogModule,TranslateModule
   ],
   templateUrl: './meeting-info.component.html',
   styleUrls: ['./meeting-info.component.css']
